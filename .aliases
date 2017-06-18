@@ -33,6 +33,7 @@ alias tl="travis lint"
 alias tm="travis monitor --my-repos --notify growl"
 alias v="vim"
 alias vg="vagrant"
+alias y="yarn"
 
 # Enable git command autocompletion for 'g' as well
 complete -o default -o nospace -F _git g

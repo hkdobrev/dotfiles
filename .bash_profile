@@ -83,3 +83,6 @@ eval "$(gulp --completion=bash)"
 
 # Symfony console completion
 eval "$(symfony-autocomplete --aliases=c)"
+
+# added by travis gem
+[ -f /Users/hkdobrev/.travis/travis.sh ] && source /Users/hkdobrev/.travis/travis.sh

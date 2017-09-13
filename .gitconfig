@@ -117,6 +117,9 @@
     # The 8-char abbreviation works well with the default pretty format below
     l = log --abbrev-commit --abbrev=8
 
+    # Reverse log
+    lr = log --abbrev-commit --abbrev=8 --reverse
+
     # Same as l, but with graph.
     # Recursive resolving of aliases break tab-completion for options,
     # so the command is listed again.

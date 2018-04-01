@@ -321,6 +321,10 @@
     # Use --prompt to override.
     prompt = false
 
+[mergetool.fac]
+
+    cmd = fac
+
 [pager]
     # Use colors when paging regardless of default color setting.
     color = true

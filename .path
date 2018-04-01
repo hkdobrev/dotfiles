@@ -18,3 +18,5 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 # Add Go-installed binaries to PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+export PATH=$PATH:$HOME/go/bin

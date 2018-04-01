@@ -21,6 +21,7 @@ Thumbs.db
 *.dll
 *.exe
 *.o
+*.phar
 *.pyc
 *.so
 

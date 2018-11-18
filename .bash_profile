@@ -54,8 +54,8 @@ source ~/.iterm2_shell_integration.bash
 
 if command -v brew >/dev/null; then
     # Add bash completion for brew installed formuale
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        source $(brew --prefix)/etc/bash_completion
+    if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+        . $(brew --prefix)/share/bash-completion/bash_completion
     elif [ -f /etc/bash_completion ]; then
         source /etc/bash_completion;
     fi

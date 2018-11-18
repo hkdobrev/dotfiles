@@ -25,3 +25,7 @@ export GREP_OPTIONS="--color=auto";
 export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
 export GOPATH=$HOME/go
+
+export GIT_DUET_CO_AUTHORED_BY=1
+export GIT_DUET_ROTATE_AUTHOR=1
+export GIT_DUET_GLOBAL=1

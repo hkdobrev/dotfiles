@@ -1,12 +1,10 @@
 {
     "require": {
-        "clippings/composer-init": "^0.4.0",
-        "phpunit/phpunit": "^5.3",
-        "squizlabs/php_codesniffer": "^2.6",
-        "phpmd/phpmd": "^2.4",
-        "bamarni/symfony-console-autocomplete": "^1.2"
+        "bamarni/symfony-console-autocomplete": "^1.2",
+        "friendsofphp/php-cs-fixer": "^2.11, <2.12"
     },
+    "prefer-stable": true,
     "require-dev": {
-        "psecio/parse": "^0.7.0"
+        "escapestudios/symfony2-coding-standard": "^3.2"
     }
 }

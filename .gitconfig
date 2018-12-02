@@ -152,6 +152,9 @@
     # Shorthand for pull
     pl = pull --ff-only
 
+    # List pull requests via hub
+    prs = pr list
+
     # Create a new remote branch with the same name and track it.
     # First argument is remote name. Defaults to "origin".
     # Second, third and fourth argument are passed to `git push`.

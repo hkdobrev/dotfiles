@@ -61,6 +61,13 @@ Thumbs.db
 *.xlsx
 *.csv
 
+# Secrets #
+###########
+*.asc
+id_rsa
+*.sig
+*.gpg
+
 # IDE-specific #
 ################
 *.sublime-workspace

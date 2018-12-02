@@ -372,6 +372,11 @@
     # Reuse recorded resolutions
     enabled = true
 
+[trailer]
+    # Configure commit message trailer handling in Git Duet
+    # See https://github.com/git-duet/git-duet#co-authored-by-trailer-support
+    ifexists = addIfDifferent
+
 # URL shorthands
 # 
 # See `git help config` and search for "url.<base>"

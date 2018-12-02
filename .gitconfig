@@ -46,7 +46,7 @@
 
     # Checkout a branch. Create it if it doesn't exist
     # See`git help checkout`
-    chb = checkout -B
+    chb = checkout -b
 
     # Shorthand for clone
     cl = clone

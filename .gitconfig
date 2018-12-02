@@ -48,6 +48,9 @@
     # See`git help checkout`
     chb = checkout -b
 
+    # Show GitHub Checks / Commit Status
+    ci = ci-status --verbose
+
     # Shorthand for clone
     cl = clone
 

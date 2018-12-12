@@ -9,7 +9,7 @@ Plug 'majutsushi/tagbar'
 " supertab has configuration problems on Vim 8
 " See https://github.com/ervandew/supertab/issues/185
 " Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 " Navigation and manipulation
 Plug 'gcmt/breeze.vim'

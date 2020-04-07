@@ -20,3 +20,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 export PATH=$PATH:$HOME/go/bin
+
+# Add `~/bin` to the `$PATH`
+export PATH="$HOME/bin:$PATH";

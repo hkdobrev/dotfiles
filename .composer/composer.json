@@ -1,10 +1,12 @@
 {
     "require": {
-        "bamarni/symfony-console-autocomplete": "^1.2",
-        "friendsofphp/php-cs-fixer": "^2.11, <2.12"
+        "bamarni/symfony-console-autocomplete": "^1.3",
+        "balbuf/composer-git-merge-driver": "^1.1",
+        "carlosas/phpat": "^0.6.0",
+        "symfony/event-dispatcher": "^4.2"
     },
     "prefer-stable": true,
     "require-dev": {
-        "escapestudios/symfony2-coding-standard": "^3.2"
-    }
+    },
+    "minimum-stability": "stable"
 }

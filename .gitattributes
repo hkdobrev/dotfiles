@@ -18,3 +18,8 @@
 *.ruby diff=ruby
 *.rake diff=ruby
 *.js diff="javascript"
+
+# Configure conflicts in Composer files to be resolved via the composer_json merge driver
+# It is configured in ~/.gitconfig
+composer.json merge=composer_json
+composer.lock merge=composer_json

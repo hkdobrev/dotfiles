@@ -328,6 +328,13 @@
     # opendiff opens FileMerge
     tool = opendiff
 
+# Custom merge driver for Composer files. Covers both composer.json and composer.lock. See ~/.gitattributes
+# https://github.com/balbuf/composer-git-merge-driver
+[merge "composer_json"]
+    name = composer JSON file merge driver
+    driver = composer-git-merge-driver %O %A %B %L %P
+    recursive = binary
+
 [mergetool]
     # No *.orig files left when using mergetool.
     keepBackup = false

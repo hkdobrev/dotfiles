@@ -41,7 +41,7 @@ Thumbs.db
 # Logs and databases #
 ######################
 *.log
-# *.sql
+*.sql
 *.sqlite
 
 # Fonts #
@@ -67,6 +67,7 @@ Thumbs.db
 id_rsa
 *.sig
 *.gpg
+*.tfstate
 
 # IDE-specific #
 ################

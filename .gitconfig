@@ -36,7 +36,7 @@
 
     # Shorthand for browse
     # See`hub help browse`
-    br = browse
+    br = !hub browse
 
     # Shorthand for commit
     c = commit
@@ -49,10 +49,10 @@
     chb = checkout -b
 
     # Show GitHub Checks / Commit Status
-    ci = ci-status --verbose
+    ci = !hub ci-status --verbose
 
     # Shorthand for clone
-    cl = clone
+    cl = !hub clone
 
     # Delete all untracked files and directories.
     # See`git help clean`
@@ -153,7 +153,7 @@
     pl = pull --ff-only
 
     # List pull requests via hub
-    prs = pr list
+    prs = !hub pr list
 
     # Create a new remote branch with the same name and track it.
     # First argument is remote name. Defaults to "origin".

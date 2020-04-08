@@ -84,16 +84,6 @@
     # `git di $number` shows the diff between the state `$number` revisions ago and the current state
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
-    # Diff working tree to HEAD (a.k.a last commit).
-    # Using difftool.tool for visualising diffs.
-    # Do not prompt for each file. Use --prompt to override.
-    dt = difftool --no-prompt
-
-    # Diff staging area (a.k.a index) to HEAD (a.k.a last commit).
-    # Using difftool.tool for visualising diffs.
-    # Do not prompt for each file. Use --prompt to override.
-    dtc = difftool --cached --no-prompt
-
     # Remove branches that have already been merged with master
     dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 

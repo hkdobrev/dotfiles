@@ -386,6 +386,10 @@
     # Reuse recorded resolutions
     enabled = true
 
+[status]
+    # Show all untracked files in untracked directories
+    showUntrackedFiles = all
+
 [trailer]
     # Configure commit message trailer handling in Git Duet
     # See https://github.com/git-duet/git-duet#co-authored-by-trailer-support

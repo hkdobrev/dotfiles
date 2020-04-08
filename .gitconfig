@@ -162,6 +162,9 @@
     # Shorthand for remote
     r = remote
 
+    # Show branches sorted by recency, good to combine with ` | head` or ` | less -RF` for many branches
+    recent = branch --sort="-committerdate" --format=' %(color:blue)%(align:12,right)%(committerdate:relative)%(end)%(color:reset):%09%(color:yellow)%(refname:short)%(color:reset)' --color=always
+
     report = log --abbrev-commit --abbrev=8 --since=1.week.ago --first-parent --reverse
 
     # Interactive rebase with the given number of latest commits

@@ -201,6 +201,9 @@
     # Shorthand for tag
     t = tag
 
+    # Rest local branch to upstream
+    upstream = reset --soft @{u}
+
 [apply]
     # Detect whitespace errors when applying a patch
     whitespace = warn

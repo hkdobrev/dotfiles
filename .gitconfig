@@ -422,3 +422,8 @@
 [url "git://gist.github.com/"]
 
     insteadOf = "gist:"
+
+# Instruct Git to not guess user.name and user.email, but only allow
+# commits if they are set in configuration
+[user]
+    useConfigOnly = true

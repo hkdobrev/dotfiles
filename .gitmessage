@@ -1,0 +1,27 @@
+
+# Replace the above line with imperative summary
+#------------------------------------------------^
+#                                              50^
+
+# TICKET-123
+# Closes #123
+
+# An awesome description of WHY you did this work, not HOW/WHAT it does.
+# The diff attached to commit should describe implementation (HOW) 
+# well-enough.
+
+#----------------------------------------------------------------------^
+#                                                                    72^
+# 1. Summary should be imperative (not past tense), 50 characters or
+#    less, and not end with a period.
+#
+# 2. Description of commit should explain WHY a change was made and
+#    lines should be wrapped to 72 characters.
+#
+# 3. Optionally, reference a ticket number. If needed, uncomment and
+#    go to town.
+#
+# For more tips:
+#    http://chris.beams.io/posts/git-commit
+#    https://github.com/erlang/otp/wiki/writing-good-commit-messages#do
+#

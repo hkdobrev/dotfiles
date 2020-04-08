@@ -240,6 +240,10 @@
     header = white dim
     untracked = cyan
 
+[commit]
+    # Set a template for writing commit messages in the editor
+    template = ~/.gitmessage
+
 [core]
     # Global `.gitattributes`
     attributesfile = ~/.gitattributes

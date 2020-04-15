@@ -25,31 +25,9 @@ for option in autocd globstar; do
     shopt -s "$option" 2> /dev/null;
 done;
 
-# Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-    complete -o default -o nospace -F _git g;
-fi;
-
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
-
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults;
-
-# Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
-
-# If possible, add tab completion for many more commands
-if [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-fi
-
-# Enable Shell integration for iTerm2
-# http://iterm2.com/shell_integration.html
-source ~/.iterm2_shell_integration.bash
-
 if command -v brew >/dev/null; then
+    export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
     # Add bash completion for brew installed formuale
     if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
         . $(brew --prefix)/share/bash-completion/bash_completion
@@ -64,22 +42,43 @@ if command -v brew >/dev/null; then
     # Enable brew command autocompletion for `b` alias as well
     complete -o default -F _brew b
 
-    # Enable vagrant command autocompletion for `vg` alias as well
-    complete -o default -F _vagrant vg
+    # Enable tab completion for `g` alias of git
+    if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+        complete -o default -o nospace -F _git g;
+    fi;
 elif [ -f /etc/bash_completion ]; then
+    # If brew bash completion is not available, add basic bash completion
     source /etc/bash_completion;
 fi
+
+# Symfony console completion
+eval "$(symfony-autocomplete --aliases=c)"
+eval "$(symfony-autocomplete --aliases=phpstan)"
+
+# Add tab completion for dbt
+source ~/.dbt-completion.bash
+
+# Enable vagrant command autocompletion for `vg` alias as well
+complete -o default -F _vagrant vg
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
+
+# Add tab completion for `defaults read|write NSGlobalDomain`
+# You could just use `-g` instead, but I like being explicit
+complete -W "NSGlobalDomain" defaults;
+
+# Add `killall` tab completion for common apps
+complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+# Enable Shell integration for iTerm2
+# http://iterm2.com/shell_integration.html
+source ~/.iterm2_shell_integration.bash
 
 # Add `rbenv init` to the shell to enable shims and autocompletion
 if command -v rbenv > /dev/null; then
     eval "$(rbenv init -)"
 fi;
-
-# gulp completion
-eval "$(gulp --completion=bash)"
-
-# Symfony console completion
-eval "$(symfony-autocomplete --aliases=c)"
 
 # added by travis gem
 [ -f /Users/hkdobrev/.travis/travis.sh ] && source /Users/hkdobrev/.travis/travis.sh

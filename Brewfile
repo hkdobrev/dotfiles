@@ -37,9 +37,10 @@ brew 'homebrew/dupes/grep'
 brew 'homebrew/dupes/screen'
 brew 'homebrew/dupes/zlib'
 
-# Install PHP and tools
-brew 'homebrew/php/php70', args: ['with-gmp']
-brew 'homebrew/php/php70-xdebug'
+# Install PHP
+brew 'php@7.4'
+brew 'php@7.1'
+brew 'php@7.3'
 
 # Install other useful binaries
 brew 'ack'

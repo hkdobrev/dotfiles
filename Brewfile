@@ -52,7 +52,6 @@ brew 'git-utils'
 brew 'imagemagick', args: ['with-webp']
 brew 'hub', args: ['devel']
 brew 'htop-osx'
-brew 'jump'
 brew 'jp2a'
 brew 'jpegoptim'
 brew 'keybase'

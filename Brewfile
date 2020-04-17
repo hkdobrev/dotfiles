@@ -11,17 +11,22 @@ brew 'gnu-sed', args: ['default-names']
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
 brew 'bash'
 # Install Bash completion
-brew 'bash-completion'
+brew 'bash-completion@2'
 
 # Install useful completions
 brew 'homebrew/completions/apm-bash-completion'
 brew 'homebrew/completions/brew-cask-completion'
-brew 'homebrew/completions/composer-completion'
 brew 'homebrew/completions/bundler-completion'
+brew 'homebrew/completions/composer-completion'
 brew 'homebrew/completions/gem-completion'
-brew 'homebrew/completions/grunt-completion'
+brew 'homebrew/completions/launchctl-completion'
 brew 'homebrew/completions/open-completion'
+brew 'homebrew/completions/open-completion'
+brew 'homebrew/completions/pip-completion'
+brew 'homebrew/completions/rake-completion'
+brew 'homebrew/completions/ruby-completion'
 brew 'homebrew/completions/vagrant-completion'
+brew 'homebrew/completions/yarn-completion'
 
 # Install wget with IRI support
 brew 'wget', args: ['with-iri']

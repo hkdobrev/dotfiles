@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# We have to convert to jpeg before we identify, otherwise
-# identify returns 0x0 for the committed version of the file
-# (no idea why this is the case). Also, we wrap the identify
-# command in an echo to append a newline.
-convert -quiet $1 jpg:- | echo $(identify -format '%[fx:w]x%[fx:h]' -)
-
-convert -quiet $1 jpg:- | jp2a --colors --width=60 -

@@ -285,9 +285,6 @@
     # See`git help config` and search for "diff.tool"
     tool=opendiff
 
-[diff "asciidiff"]
-    textconv = ~/bin/img-ascii-diff
-
 [diff "javascript"]
     xfuncname = "^\\s*(.*?\\bfunction\\b.*?\\(.*?\\))"
 

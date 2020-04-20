@@ -2,13 +2,6 @@
 #* text=auto
 # Disabled because of https://github.com/mathiasbynens/dotfiles/issues/149 :(
 
-# Diff images with ~/bin/img-ascii-diff
-# https://gist.github.com/rroblak/da71c748cf4be5a5a11b
-*.jpg diff=asciidiff
-*.jpeg diff=asciidiff
-*.png diff=asciidiff
-*.gif diff=asciidiff
-
 # Assign language-aware hunk-headers
 *.php diff=php
 *.html.twig diff=html

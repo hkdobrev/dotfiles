@@ -317,7 +317,7 @@
     templatedir = /Users/hkdobrev/.git-template
 
 [interactive]
-    diffFilter = diff-so-fancy | less --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --tilde --status-column --HILITE-UNREAD
+    # diffFilter = diff-so-fancy | less --tabs=4 --tilde --status-column --HILITE-UNREAD
 
 [log]
     # Always use .mailmap resolution of author names and emails in git-log

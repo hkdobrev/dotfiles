@@ -143,7 +143,7 @@
     p = push
 
     # Shorthand for pull
-    pl = pull --ff-only
+    pl = pull --ff-only --rebase
 
     # List pull requests via hub
     prs = !hub pr list

@@ -12,11 +12,17 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date";
 export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 
+# less options:
+# --quit-if-one-screen - exit less if the output is short
+# --mouse              - allow scrolling with the mouse/trackpad
+# --raw-control-chars  - pass through escape sequences like colours so output is still formatted
+# --no-init            - do not clear the screen after quitting
+export LESS="--quit-if-one-screen --mouse --raw-control-chars --no-init --tabs=4 --HILITE-UNREAD --tilde --status-column"
 # Highlight section titles in manual pages
 export LESS_TERMCAP_md="${yellow}";
 
-# Don’t clear the screen after quitting a manual page
-export MANPAGER="less -X";
+export PAGER="less";
+export MANPAGER="less";
 
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto";

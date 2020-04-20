@@ -254,6 +254,8 @@
     # Global `.gitignore`
     excludesfile = ~/.gitignore_global
 
+    pager = diff-so-fancy | less --tabs=4
+
     # Make `git rebase` safer on OS X
     # More info: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx
     trustctime = false

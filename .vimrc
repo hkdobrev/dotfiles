@@ -168,8 +168,6 @@ nnoremap <Leader>o :set nopaste<CR>
 if has("autocmd")
     " Enable file type detection
     filetype on
-    " Treat .json files as .js
-    autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
 
 """""""

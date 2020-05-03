@@ -1,0 +1,80 @@
+" .vimrc.plugins - Vim plugin configuration
+" vim: nowrap:sw=4:sts=4
+
+" Auto-bootstrap vim-plug.
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
+
+" File and symbols navigation
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+
+" Autocompletion and snippets
+Plug 'Valloric/YouCompleteMe'
+" supertab has configuration problems on Vim 8
+" See https://github.com/ervandew/supertab/issues/185
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+
+" Navigation and manipulation
+Plug 'gcmt/breeze.vim'
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tomtom/tcomment_vim'
+
+" Git integration
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Syntax
+Plug 'cakebaker/scss-syntax.vim'
+
+" Themes
+Plug 'ajh17/Spacegray.vim'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Windows
+Plug 'vim-scripts/ZoomWin'
+
+call plug#end()
+
+"""""""""""""""""""""""
+" Plugin confiuguration
+"""""""""""""""""""""""
+
+" Use tree-style listing in netrw
+let g:netrw_liststyle = 3
+let g:netrw_list_hide = '\.git,\.DS_Store'
+
+" CtrlP
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+let g:ctrlp_max_files = 0
+
+" Ultisnip
+" NOTE: <f1> otherwise it overrides <tab> forever
+let g:UltiSnipsExpandTrigger="<f1>"
+let g:UltiSnipsJumpForwardTrigger="<f1>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:did_UltiSnips_vim_after = 1
+
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+
+" Disable tComment to escape some entities
+let g:tcomment#replacements_xml={}
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" Color scheme
+colorscheme spacegray
+let g:spacegray_underline_search = 1
+
+" Airline theme
+let g:airline_theme='badwolf'

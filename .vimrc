@@ -1,39 +1,3 @@
-call plug#begin('~/.vim/plugged')
-
-" File and symbols navigation
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'majutsushi/tagbar'
-
-" Autocompletion and snippets
-Plug 'Valloric/YouCompleteMe'
-" supertab has configuration problems on Vim 8
-" See https://github.com/ervandew/supertab/issues/185
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-
-" Navigation and manipulation
-Plug 'gcmt/breeze.vim'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tomtom/tcomment_vim'
-
-" Git integration
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-" Syntax
-Plug 'cakebaker/scss-syntax.vim'
-
-" Themes
-Plug 'ajh17/Spacegray.vim'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Windows
-Plug 'vim-scripts/ZoomWin'
-
-call plug#end()
-
 " Make Vim more useful
 set nocompatible
 
@@ -76,13 +40,6 @@ endif
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
-
-" Color scheme
-colorscheme spacegray
-let g:spacegray_underline_search = 1
-
-" Airline theme
-let g:airline_theme='badwolf'
 
 " Disable error bells
 set noerrorbells
@@ -154,31 +111,6 @@ endif
 " Don’t reset cursor to start of line when moving around.
 set nostartofline
 
-"""""""""""""""""""""""
-" Plugin confiuguration
-"""""""""""""""""""""""
-
-" Use tree-style listing in netrw
-let g:netrw_liststyle = 3
-let g:netrw_list_hide = '\.git,\.DS_Store'
-
-" CtrlP
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-let g:ctrlp_max_files = 0
-
-" Ultisnip
-" NOTE: <f1> otherwise it overrides <tab> forever
-let g:UltiSnipsExpandTrigger="<f1>"
-let g:UltiSnipsJumpForwardTrigger="<f1>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:did_UltiSnips_vim_after = 1
-
-" vim-airline
-let g:airline#extensions#tabline#enabled = 1
-
-" Disable tComment to escape some entities
-let g:tcomment#replacements_xml={}
-
 """""""""""""""""""
 " Keyboard mappings
 """""""""""""""""""
@@ -239,9 +171,6 @@ if has("autocmd")
     " Treat .json files as .js
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
 
 """""""
 " Other
@@ -262,10 +191,10 @@ set ttyfast
 set encoding=utf-8 nobomb
 
 " Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+set backupdir=~/.vim/tmp/backups
+set directory=~/.vim/tmp/swaps
 if exists("&undodir")
-    set undodir=~/.vim/undo
+    set undodir=~/.vim/tmp/undo
 endif
 
 " Don’t create backups when editing files in certain directories
@@ -281,3 +210,13 @@ set secure
 
 " Automatically reload files if changed outside of Vim and not changed in Vim
 set autoread
+
+" Source local override file if one exists.
+if filereadable(expand("~/.vim/.vimrc.local"))
+    source ~/.vim/.vimrc.local
+endif
+
+"  Source plugins.
+if filereadable(expand("~/.vim/.vimrc.plugins"))
+    source ~/.vim/.vimrc.plugins
+endif

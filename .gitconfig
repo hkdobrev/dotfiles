@@ -310,7 +310,7 @@
 
 [include]
     # Additional Git configuration per machine not committed to the dotfiles repo
-    path = .gitconfig.extra
+    path = .gitconfig.local
 
 [init]
     # Initialize a new repository with a template for its `.git` folder

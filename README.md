@@ -20,7 +20,7 @@ It is recommended to fork the repo and adjust it as needed.
 
 #### Installing initial tools
 
-When setting up a new computer use the `install.sh` script to install Homebrew, Homebrew budle, rbenv, vim-plug, Composer, set up Bash 4 and the XCode CLI tools.
+When setting up a new computer use the `init/install.sh` script to install Homebrew, Homebrew bundle, rbenv, vim-plug, Composer, set up Bash 4 and the XCode CLI tools.
 
 ``` bash
 ./init/install.sh
@@ -31,11 +31,15 @@ When setting up a new computer use the `install.sh` script to install Homebrew, 
 To later update the dotfiles configuration:
 
 ```bash
-cd $HOME
+cd
 git pull
 ```
 
-To update your software run the `update` command which will update Ruby gems, Homebrew formulae, Composer globals and others.
+To update your software run the `update` alias which will update Ruby gems, Homebrew formulae, Composer globals and others:
+
+```bash
+update
+```
 
 ### Specify the `$PATH`
 
@@ -47,32 +51,20 @@ Here’s an example `~/.path` file that adds `~/utils` to the `$PATH`:
 export PATH="$HOME/utils:$PATH"
 ```
 
-### Add custom commands without creating a new fork
+### Add custom configuration without creating a new fork
 
-If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
+If `~/.local` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
 
-My `~/.extra` looks something like this:
+Git would try to load additional configuration via `~/.gitconfig.local`. Use it to populate your own user information:
 
 ```bash
 # Git credentials
-# Not in the repository, to prevent people from accidentally committing under my name
-GIT_AUTHOR_NAME="Mathias Bynens"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-git config --file=$HOME/.gitconfig.extra user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="mathias@mailinator.com"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git config --file=$HOME/.gitconfig.extra user.email "$GIT_AUTHOR_EMAIL"
+git config --file=~/.gitconfig.local user.name "John Doe"
+git config --file=~/.gitconfig.local user.email "jonh.doe@example.com"
+git config --file=~/.gitconfig.local user.signingKey "0xABCDE"
 ```
 
-You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/hkdobrev/dotfiles/fork) instead, though.
-
-### Sensible OS X defaults
-
-When setting up a new Mac, you may want to set some sensible OS X defaults:
-
-```bash
-./.osx
-```
+You could also use `~/.local` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/hkdobrev/dotfiles/fork) for any significant changes, though.
 
 ### Install Homebrew formulae and Cask apps
 

@@ -240,6 +240,8 @@
     untracked = cyan
 
 [commit]
+    gpgSign = true
+
     # Set a template for writing commit messages in the editor
     template = ~/.gitmessage
 
@@ -392,6 +394,9 @@
 [status]
     # Show all untracked files in untracked directories
     showUntrackedFiles = all
+
+[tag]
+    gpgSign = true
 
 [trailer]
     # Configure commit message trailer handling in Git Duet

@@ -12,6 +12,9 @@ call plug#begin('~/.vim/plugged')
 " File and symbols navigation
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'noahfrederick/vim-composer'
 
 " Autocompletion and snippets
 Plug 'Valloric/YouCompleteMe'
@@ -29,6 +32,9 @@ Plug 'tomtom/tcomment_vim'
 " Git integration
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+" Indentation and whitespace
+Plug 'editorconfig/editorconfig-vim'
 
 " Syntax
 Plug 'cakebaker/scss-syntax.vim'

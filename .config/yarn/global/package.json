@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "c4builder": "^0.2.5",
+    "cloc": "^2.3.3",
+    "create-react-app": "^1.5.2",
+    "decktape": "^2.4.3",
+    "diff2html": "^2.3.1",
+    "diff2html-cli": "^2.5.2",
+    "do-not-disturb-cli": "^0.1.0",
+    "dot-json": "^1.0.3",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "license-checker": "^20.0.0",
+    "prettier": "^1.16.4",
+    "reveal-cli": "^2.0.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2",
+    "uglify-js": "^2.8.15",
+    "web-ext": "^2.2.2",
+    "yarn-tools": "^0.4.0"
+  }
+}

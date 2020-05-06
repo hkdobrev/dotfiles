@@ -243,18 +243,18 @@
     gpgSign = true
 
     # Set a template for writing commit messages in the editor
-    template = ~/.gitmessage
+    template = ~/git/.gitmessage
 
 [core]
     # Global `.gitattributes`
-    attributesfile = ~/.gitattributes
+    attributesfile = ~/git/.gitattributes
 
     # Default editor for commit messages and other inputs
     # Even when EDITOR is set to something else
     editor=vim
 
     # Global `.gitignore`
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/git/.gitignore_global
 
     pager = diff-so-fancy | less --tabs=4
 
@@ -312,12 +312,12 @@
 
 [include]
     # Additional Git configuration per machine not committed to the dotfiles repo
-    path = .gitconfig.local
+    path = ~/git/.gitconfig.local
 
 [init]
     # Initialize a new repository with a template for its `.git` folder
     # Useful for adding hooks by default
-    templatedir = /Users/hkdobrev/.git-template
+    templatedir = ~/git/.git-template
 
 [interactive]
     # diffFilter = diff-so-fancy | less --tabs=4 --tilde --status-column --HILITE-UNREAD
@@ -336,7 +336,7 @@
     # opendiff opens FileMerge
     tool = opendiff
 
-# Custom merge driver for Composer files. Covers both composer.json and composer.lock. See ~/.gitattributes
+# Custom merge driver for Composer files. Covers both composer.json and composer.lock. See ~/git/.gitattributes
 # https://github.com/balbuf/composer-git-merge-driver
 [merge "composer_json"]
     name = composer JSON file merge driver

@@ -55,13 +55,13 @@ export PATH="$HOME/utils:$PATH"
 
 If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
 
-Git would try to load additional configuration via `~/.gitconfig.local`. Use it to populate your own user information:
+Git would try to load additional configuration via `~/git/.gitconfig.local`. Use it to populate your own user information:
 
 ```bash
 # Git credentials
-git config --file=~/.gitconfig.local user.name "John Doe"
-git config --file=~/.gitconfig.local user.email "jonh.doe@example.com"
-git config --file=~/.gitconfig.local user.signingKey "0xABCDE"
+git config --file=~/git/.gitconfig.local user.name "John Doe"
+git config --file=~/git/.gitconfig.local user.email "jonh.doe@example.com"
+git config --file=~/git/.gitconfig.local user.signingKey "0xABCDE"
 ```
 
 You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/hkdobrev/dotfiles/fork) for any significant changes, though.

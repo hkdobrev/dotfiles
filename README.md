@@ -53,7 +53,7 @@ export PATH="$HOME/utils:$PATH"
 
 ### Add custom configuration without creating a new fork
 
-If `~/.local` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
+If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
 
 Git would try to load additional configuration via `~/.gitconfig.local`. Use it to populate your own user information:
 
@@ -64,7 +64,7 @@ git config --file=~/.gitconfig.local user.email "jonh.doe@example.com"
 git config --file=~/.gitconfig.local user.signingKey "0xABCDE"
 ```
 
-You could also use `~/.local` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/hkdobrev/dotfiles/fork) for any significant changes, though.
+You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/hkdobrev/dotfiles/fork) for any significant changes, though.
 
 ### Install Homebrew formulae and Cask apps
 

@@ -41,12 +41,9 @@
     # Shorthand for commit
     c = commit
 
-    # Shorthand for checkout
-    ch = checkout
-
-    # Checkout a branch. Create it if it doesn't exist
-    # See`git help checkout`
-    chb = checkout -b
+    # Unlearn checkout shortcuts, use switch and restore since Git 2.23.
+    ch = "!f() { echo 'Did you mean to checkout a branch or a file?'; echo 'Use git sw for switching a branch.'; echo 'Use git restore for restoring a file in the working tree.'; exit 1; }; f"
+    chb = "!f() { echo 'Did you mean to create a new branch?'; echo 'Use git swtch -c or the git swc shortcut instead!'; exit 1; }; f"
 
     # Show GitHub Checks / Commit Status
     ci = !hub ci-status --verbose
@@ -189,6 +186,12 @@
 
     # Shorthand for shortlog
     shl = shortlog
+
+    # Change branch
+    sw = switch
+
+    # Create branch
+    swc = switch --create
 
     # Shorthand for stash
     st = stash

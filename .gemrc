@@ -1,6 +1,10 @@
+---
+:backtrace: false
+:bulk_threshold: 1000
+:sources:
+- https://rubygems.org/
 :update_sources: true
 :verbose: true
-:bulk_threshold: 1000
-:backtrace: false
-:benchmark: false
-gem: --no-ri --no-rdoc
+:concurrent_downloads: 8
+benchmark: false
+gem: "--no-ri --no-rdoc"

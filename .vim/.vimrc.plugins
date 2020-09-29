@@ -17,7 +17,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'noahfrederick/vim-composer'
 
 " Autocompletion and snippets
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 " supertab has configuration problems on Vim 8
 " See https://github.com/ervandew/supertab/issues/185
 Plug 'ervandew/supertab'
@@ -38,6 +38,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Syntax
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'aklt/plantuml-syntax'
 
 " Themes
 Plug 'ajh17/Spacegray.vim'
@@ -70,17 +71,26 @@ let g:did_UltiSnips_vim_after = 1
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
-
-" Disable tComment to escape some entities
-let g:tcomment#replacements_xml={}
-
+" Airline theme
+let g:airline_theme='badwolf'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+
+" Disable tComment to escape some entities
+let g:tcomment#replacements_xml={}
 
 " Color scheme
 colorscheme spacegray
 let g:spacegray_underline_search = 1
 
-" Airline theme
-let g:airline_theme='badwolf'
+" vim-surround key mappings
+" Surround text currently selected while in visual mode
+" (The surrounded text is kept selected after being surround)
+vmap <leader>" S"lvi"
+vmap <leader>' S'lvi'
+vmap <leader>` S`lvi`
+vmap <leader>( S)lvi(
+vmap <leader>{ S}lvi{
+vmap <leader>[ S]lvi[
+vmap <leader>< S>lvi<

@@ -162,6 +162,7 @@
     # Show branches sorted by recency, good to combine with ` | head` or ` | less -RF` for many branches
     recent = branch --sort="-committerdate" --format=' %(color:blue)%(align:12,right)%(committerdate:relative)%(end)%(color:reset):%09%(color:yellow)%(refname:short)%(color:reset)' --color=always
 
+    # Commits from last week from oldest to newest
     report = log --abbrev-commit --abbrev=8 --since=1.week.ago --first-parent --reverse
 
     # Interactive rebase with the given number of latest commits
@@ -317,10 +318,10 @@
     # Additional Git configuration per machine not committed to the dotfiles repo
     path = ~/git/.gitconfig.local
 
-[init]
-    # Initialize a new repository with a template for its `.git` folder
-    # Useful for adding hooks by default
-    templatedir = ~/git/.git-template
+# [init]
+#     # Initialize a new repository with a template for its `.git` folder
+#     # Useful for adding hooks by default
+#     templatedir = ~/git/.git-template
 
 [interactive]
     # diffFilter = diff-so-fancy | less --tabs=4 --tilde --status-column --HILITE-UNREAD

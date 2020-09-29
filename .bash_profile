@@ -52,6 +52,10 @@ fi
 eval "$(symfony-autocomplete --aliases=c)"
 eval "$(symfony-autocomplete --aliases=phpstan)"
 
+# Enable terraform completion
+complete -C /usr/local/bin/terraform terraform
+complete -C /usr/local/bin/terraform tf
+
 # Add tab completion for dbt
 source ~/.dbt-completion.bash
 

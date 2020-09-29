@@ -1,8 +1,12 @@
 # Load GNU coreutils into PATH
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 
 # Discover GNU coreutils man pages
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/man:$MANPATH"
+export MANPATH="/usr/local/opt/gnu-sed/libexec/man:$MANPATH"
+export MANPATH="/usr/local/opt/grep/libexec/man:$MANPATH"
 
 # Load binaries globally installed via Composer
 export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -21,5 +25,8 @@ export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 export PATH=$PATH:$HOME/go/bin
 
+export PATH=$PATH:$HOME/Library/Python/3.7/bin
+
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"

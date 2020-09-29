@@ -36,3 +36,5 @@ export GIT_DUET_ROTATE_AUTHOR=1
 export GIT_DUET_GLOBAL=1
 
 export NVM_DIR="$HOME/.nvm"
+
+export GPG_TTY=$(tty)

@@ -16,7 +16,7 @@ Thumbs.db
 
 # Compiled source #
 ###################
-*.com
+# *.com
 *.class
 *.dll
 *.exe

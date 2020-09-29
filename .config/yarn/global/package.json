@@ -6,6 +6,7 @@
     "diff2html": "^2.3.1",
     "diff2html-cli": "^2.5.2",
     "do-not-disturb-cli": "^0.1.0",
+    "docsify-cli-hotfix": "^4.4.1",
     "dot-json": "^1.0.3",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",

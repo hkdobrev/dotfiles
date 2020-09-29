@@ -4,6 +4,7 @@
     "eslint": "^2.4.0",
     "gulp": "^3.9.0",
     "jslint": "^0.9.6",
+    "license-to-fail": "^3.0.0",
     "resume": "^0.4.8"
   }
 }

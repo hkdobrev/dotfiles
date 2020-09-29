@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "c4builder": "^0.2.5",
     "cloc": "^2.3.3",
     "create-react-app": "^1.5.2",
     "decktape": "^2.4.3",

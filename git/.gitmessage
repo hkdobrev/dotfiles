@@ -1,7 +1,7 @@
 
-# Replace the above line with imperative summary
-#------------------------------------------------^
-#                                              50^
+
+#----------------------------------------------50^
+
 
 # TICKET-123
 # Closes #123
@@ -10,8 +10,8 @@
 # The diff attached to commit should describe implementation (HOW) 
 # well-enough.
 
-#----------------------------------------------------------------------^
-#                                                                    72^
+#--------------------------------------------------------------------72^
+#
 # 1. Summary should be imperative (not past tense), 50 characters or
 #    less, and not end with a period.
 #

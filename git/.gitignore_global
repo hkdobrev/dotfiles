@@ -72,6 +72,7 @@ id_rsa
 # IDE-specific #
 ################
 *.sublime-workspace
+.vscode
 
 # Temporary files - both manually and automatically created
 *.tmp

@@ -30,3 +30,7 @@ export PATH=$PATH:$HOME/Library/Python/3.7/bin
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export JAVA_HOME="/usr/local/opt/openjdk@11"
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export CPPFLAGS="-I/usr/local/opt/openjdk@11/include"

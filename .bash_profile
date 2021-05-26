@@ -54,10 +54,15 @@ eval "$(symfony-autocomplete --aliases=phpstan)"
 
 # Enable terraform completion
 complete -C /usr/local/bin/terraform terraform
-complete -C /usr/local/bin/terraform tf
+complete -C terraform tf
+
+# Minio completion
+complete -C /usr/local/bin/mc mc
 
 # Add tab completion for dbt
-source ~/.dbt-completion.bash
+if [ -f ~/.dbt-completion.bash ]; then
+    source ~/.dbt-completion.bash
+fi
 
 # Enable vagrant command autocompletion for `vg` alias as well
 complete -o default -F _vagrant vg

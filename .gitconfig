@@ -53,7 +53,7 @@
 
     # Delete all untracked files and directories.
     # See`git help clean`
-    cleanit = clean -fd
+    cleanit = clean --force -d --interactive
 
     # Shorthand for config
     # See`git help config` for config options

@@ -1,12 +1,17 @@
 # Install GNU core utilities (those that come with OS X are outdated)
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew 'coreutils'
+brew 'less'
+
 # Install some other useful utilities like `sponge`
 brew 'moreutils'
+
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
 brew 'findutils'
+
 # Install GNU `sed`, overwriting the built-in `sed`
-brew 'gnu-sed', args: ['default-names']
+brew 'gnu-sed'
+
 # Install Bash 4
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
 brew 'bash'
@@ -14,29 +19,29 @@ brew 'bash'
 brew 'bash-completion@2'
 
 # Install useful completions
-brew 'homebrew/completions/apm-bash-completion'
-brew 'homebrew/completions/brew-cask-completion'
-brew 'homebrew/completions/bundler-completion'
-brew 'homebrew/completions/composer-completion'
-brew 'homebrew/completions/gem-completion'
-brew 'homebrew/completions/launchctl-completion'
-brew 'homebrew/completions/open-completion'
-brew 'homebrew/completions/open-completion'
-brew 'homebrew/completions/pip-completion'
-brew 'homebrew/completions/rake-completion'
-brew 'homebrew/completions/ruby-completion'
-brew 'homebrew/completions/vagrant-completion'
-brew 'homebrew/completions/yarn-completion'
+brew 'apm-bash-completion'
+brew 'brew-cask-completion'
+brew 'bundler-completion'
+# brew 'composer-completion'
+brew 'gem-completion'
+brew 'launchctl-completion'
+brew 'open-completion'
+brew 'open-completion'
+brew 'pip-completion'
+brew 'rake-completion'
+brew 'ruby-completion'
+brew 'vagrant-completion'
+brew 'yarn-completion'
 
 # Install more recent versions of some OS X tools
-brew 'vim', args: ['override-system-vi']
-brew 'homebrew/dupes/grep'
-brew 'homebrew/dupes/screen'
-brew 'homebrew/dupes/zlib'
+brew 'vim'
+
+brew 'grep'
+brew 'screen'
+brew 'zlib'
 
 # Install PHP
 brew 'php@7.4', link: true
-brew 'php@7.1', link: false
 brew 'php@7.3', link: false
 
 # Install other useful binaries
@@ -57,13 +62,13 @@ brew 'dust'
 brew 'exa'
 brew 'fzf'
 brew 'gcc'
-brew 'github/gh/gh'
+brew 'gh'
 brew 'ghex'
 brew 'git'
 brew 'git-standup'
-brew 'git-diet/tap/git-duet'
 brew 'git-quick-stats'
 brew 'git-utils'
+brew 'glow'
 brew 'gnupg'
 brew 'go'
 brew 'goaccess'
@@ -71,7 +76,7 @@ brew 'graphviz'
 brew 'grip'
 brew 'httpie'
 brew 'htop-osx'
-brew 'hub', args: ['devel']
+brew 'hub'
 brew 'jp2a'
 brew 'jpegoptim'
 brew 'jq'
@@ -81,6 +86,7 @@ brew 'jupyterlab'
 brew 'tdewolff/tap/minify'
 brew 'mysql@5.7', restart_service: true, link: true
 brew 'node' # This installs `npm` too using the recommended installation method
+brew 'openjdk'
 brew 'openssl@1.1'
 brew 'optipng'
 brew 'p7zip'
@@ -96,7 +102,7 @@ brew 'subliminal'
 brew 'terraform'
 brew 'terraform-docs'
 brew 'terraform-inventory'
-brew 'terraform-provisioner-ansible'
+# brew 'terraform-provisioner-ansible'
 brew 'titlecase'
 brew 'tldr'
 brew 'tree'
@@ -109,9 +115,9 @@ brew 'youtube-dl'
 brew 'zopfli'
 
 # Install Brew Cask along with Desktop apps
-tap 'caskroom/cask'
-tap 'caskroom/fonts'
-tap 'caskroom/versions'
+tap 'homebrew/cask'
+tap 'homebrew/cask-fonts'
+tap 'homebrew/cask-versions'
 
 cask '1password-beta'
 cask '1password-cli'
@@ -122,34 +128,36 @@ cask 'firefox'
 cask 'font-source-code-pro'
 cask 'font-source-sans-pro'
 cask 'google-chrome-dev'
-cask 'google-drive'
+# cask 'google-drive'
 cask 'haptickey'
+cask 'hey'
 cask 'iterm2-nightly'
-cask 'java'
 cask 'jupyter-notebook-viewer'
 cask 'kindle'
 cask 'licecap'
+cask 'meetingbar'
 cask 'monodraw'
 cask 'mysqlworkbench'
 cask 'pocket-casts'
+cask 'protonvpn'
 cask 'rescuetime'
 cask 'screenflick'
 cask 'slack-beta'
 cask 'sublime-text-dev'
 cask 'tableplus'
 cask 'tabula'
-cask 'telegram-alpha'
+cask 'telegram-desktop-dev'
 cask 'the-unarchiver'
 cask 'vagrant'
 cask 'virtualbox-beta'
 cask 'vlc-nightly'
 cask 'wireshark'
-cask 'yubikey-personalization-gui'
+# cask 'yubikey-personalization-gui'
 cask 'zoom'
 
 # Quick Look plugins
 # See https://github.com/sindresorhus/quick-look-plugins
-cask 'betterzipql'
+# cask 'betterzipql'
 cask 'jupyter-notebook-ql'
 cask 'qlcolorcode'
 cask 'qlcommonmark'

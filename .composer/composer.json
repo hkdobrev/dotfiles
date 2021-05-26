@@ -5,7 +5,8 @@
         "symfony/event-dispatcher": "^4.2",
         "rector/rector": "^0.5",
         "icanhazstring/composer-unused": "^0.7.3",
-        "comcast/php-legal-licenses": "^1.1"
+        "comcast/php-legal-licenses": "^1.1",
+        "sensiolabs/security-checker": "^6.0"
     },
     "prefer-stable": true,
     "require-dev": {

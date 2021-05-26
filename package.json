@@ -6,5 +6,10 @@
     "jslint": "^0.9.6",
     "license-to-fail": "^3.0.0",
     "resume": "^0.4.8"
+  },
+  "dependencies": {
+    "axios": "/Users/hkdobrev/node_modules0.21.0",
+    "firebase-admin": "/Users/hkdobrev/node_modules9.4.1",
+    "firebase-idtoken-getter": "/Users/hkdobrev/node_modules1.0.3"
   }
 }

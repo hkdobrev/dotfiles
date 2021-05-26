@@ -81,7 +81,7 @@
     # `git di $number` shows the diff between the state `$number` revisions ago and the current state
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
-    # Remove branches that have already been merged with master
+    # Remove branches that have already been merged with main
     dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
     # Shorthand for fetch
@@ -133,8 +133,8 @@
     # Show the not merged branches compared to the current branch
     nm = branch --no-merged
 
-    # Show the not merged branches compared to the master branch
-    nmm = branch --no-merged master
+    # Show the not merged branches compared to the main branch
+    nmm = branch --no-merged main
 
     # Shorthand for push
     p = push
@@ -318,10 +318,13 @@
     # Additional Git configuration per machine not committed to the dotfiles repo
     path = ~/git/.gitconfig.local
 
-# [init]
-#     # Initialize a new repository with a template for its `.git` folder
-#     # Useful for adding hooks by default
-#     templatedir = ~/git/.git-template
+[init]
+     # Initialize a new repository with a template for its `.git` folder
+     # Useful for adding hooks by default
+     # templatedir = ~/git/.git-template
+
+    # Intialise repos with the default branch called main
+    defaultBranch = main
 
 [interactive]
     # diffFilter = diff-so-fancy | less --tabs=4 --tilde --status-column --HILITE-UNREAD

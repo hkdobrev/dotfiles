@@ -12,8 +12,8 @@ The repository is made for use inside your `$HOME` directory. It will ignore eve
 cd $HOME
 git init
 git remote add origin git@github.com:hkdobrev/dotfiles.git
-git fetch origin master
-git reset --hard origin/master
+git fetch origin main
+git reset --hard origin/main
 ```
 
 It is recommended to fork the repo and adjust it as needed.

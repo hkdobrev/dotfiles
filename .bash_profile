@@ -1,3 +1,4 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
@@ -22,15 +23,22 @@ for option in autocd globstar; do
     shopt -s "$option" 2> /dev/null;
 done;
 
+# Disable programmable completion which could escape dollars while doing tab completion
+#shopt -u progcomp
+
 if command -v brew >/dev/null; then
-    export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+    export PATH="$HOMEBREW_PREFIX/local/opt/mysql@5.7/bin:$PATH"
+
+#    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+#        source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+#      else
+#        for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+#          [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+#        done
+#      fi
 
     # Add bash completion for brew installed formuale
-    if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-        . $(brew --prefix)/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        source /etc/bash_completion;
-    fi
+    [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
     # Brew & Cask aliases
     alias b="brew"
@@ -40,32 +48,26 @@ if command -v brew >/dev/null; then
     complete -o default -F _brew b
 
     # Enable tab completion for `g` alias of git
-    if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-        complete -o default -o nospace -F _git g;
+    if [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-completion.bash" ]; then
+        complete -o default -o nospace -F __git_wrap__git_main git;
+        complete -o default -o nospace -F __git_wrap__git_main g;
     fi;
 elif [ -f /etc/bash_completion ]; then
     # If brew bash completion is not available, add basic bash completion
     source /etc/bash_completion;
 fi
 
-# Symfony console completion
-eval "$(symfony-autocomplete --aliases=c)"
-eval "$(symfony-autocomplete --aliases=phpstan)"
-
 # Enable terraform completion
-complete -C /usr/local/bin/terraform terraform
+complete -C "$HOMEBREW_PREFIX/local/bin/terraform" terraform
 complete -C terraform tf
 
 # Minio completion
-complete -C /usr/local/bin/mc mc
+complete -C "$HOMEBREW_PREFIX/local/bin/mc" mc
 
 # Add tab completion for dbt
 if [ -f ~/.dbt-completion.bash ]; then
     source ~/.dbt-completion.bash
 fi
-
-# Enable vagrant command autocompletion for `vg` alias as well
-complete -o default -F _vagrant vg
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config ~/.ssh/config.d/* | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
@@ -75,7 +77,7 @@ complete -o default -F _vagrant vg
 complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+complete -o "nospace" -W "Dock Finder SystemUIServer" killall;
 
 # Enable Shell integration for iTerm2
 # http://iterm2.com/shell_integration.html
@@ -94,5 +96,5 @@ fi;
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completio
+[ -s "$HOMEBREW_PREFIX/local/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$HOMEBREW_PREFIX/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "$BREW_PREFIX/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completio

@@ -30,8 +30,3 @@ chsh -s /usr/local/bin/bash
 
 # Install vim-plug plugin manager
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# ======= Composer =========
-
-# Install composer
-./composer-installer.sh

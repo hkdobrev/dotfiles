@@ -1,18 +1,12 @@
 # Load GNU coreutils into PATH
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
 
 # Discover GNU coreutils man pages
-export MANPATH="/usr/local/opt/coreutils/libexec/man:$MANPATH"
-export MANPATH="/usr/local/opt/gnu-sed/libexec/man:$MANPATH"
-export MANPATH="/usr/local/opt/grep/libexec/man:$MANPATH"
-
-# Load binaries globally installed via Composer
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-
-# Add `$(brew --prefix)/bin` and `$(brew --prefix)/sbin` to the `$PATH`
-export PATH="$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH"
+export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/man:$MANPATH"
+export MANPATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/man:$MANPATH"
+export MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/man:$MANPATH"
 
 # Add Yarn and npm global binaries to the `$PATH`
 # export PATH="$HOME/.config/yarn/global/node_modules/.bin:$(npm --global prefix)/bin:$PATH"
@@ -21,7 +15,7 @@ export PATH="$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 
 # Add Go-installed binaries to PATH
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export PATH=$PATH:$HOMEBREW_PREFIX/opt/go/libexec/bin
 
 export PATH=$PATH:$HOME/go/bin
 
@@ -29,8 +23,8 @@ export PATH=$PATH:$HOME/Library/Python/3.7/bin
 
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export JAVA_HOME="/usr/local/opt/openjdk@11"
-export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
-export CPPFLAGS="-I/usr/local/opt/openjdk@11/include"
+export PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
+export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk@11"
+export PATH="$HOMEBREW_PREFIX/opt/openjdk@11/bin:$PATH"
+export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/openjdk@11/include"

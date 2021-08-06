@@ -11,7 +11,7 @@ sudo xcodebuild -license
 # ========= Brew ==========
 
 # Install brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install brew bundle
 brew tap Homebrew/bundle
@@ -19,7 +19,7 @@ brew tap Homebrew/bundle
 # Install Brew formulae and apps via Cask
 brew bundle --file=Brewfile
 
-# Enable Bash 4 installed from brew
+# Enable latest Bash installed from brew
 # Add the Bash shell to the list of legit shells
 sudo bash -c "echo /usr/local/bin/bash >> /private/etc/shells"
 

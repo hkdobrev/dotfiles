@@ -49,7 +49,7 @@
     ci = !hub ci-status --verbose
 
     # Shorthand for clone
-    cl = !hub clone
+    cl = clone
 
     # Delete all untracked files and directories.
     # See`git help clean`

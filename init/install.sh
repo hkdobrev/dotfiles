@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # ======== XCode ==========
 
 # Install Command Line Tools

@@ -21,8 +21,7 @@ brew bundle --file=Brewfile
 
 # Enable latest Bash installed from brew
 # Add the Bash shell to the list of legit shells
-sudo bash -c "echo /usr/local/bin/bash >> /private/etc/shells"
+sudo bash -c "echo /opt/homebrew/bin/bash >> /private/etc/shells"
 
 # Change the shell for the user
-chsh -s /usr/local/bin/bash
 chsh -s /opt/homebrew/bin/bash

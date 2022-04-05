@@ -127,7 +127,6 @@ cask 'kindle'
 cask 'licecap'
 cask 'meetingbar'
 cask 'pocket-casts'
-# cask 'protonvpn'
 cask 'rescuetime'
 cask 'screenflick'
 cask 'slack-beta'
@@ -136,20 +135,10 @@ cask 'tabula'
 cask 'telegram-desktop-beta'
 cask 'vlc-nightly'
 cask 'visual-studio-code'
-# cask 'yubikey-personalization-gui'
 cask 'zoom'
 
 # Quick Look plugins
 # See https://github.com/sindresorhus/quick-look-plugins
-# cask 'betterzipql'
-# cask 'qlcolorcode'
-# cask 'qlcommonmark'
-# cask 'qlimagesize'
-# cask 'qlmarkdown'
-# cask 'qlprettypatch'
-# cask 'qlstephen'
-# cask 'qlrest'
-# cask 'qlvideo'
 cask 'quicklook-csv'
 cask 'quicklook-json'
 cask 'suspicious-package'
@@ -165,4 +154,3 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pocket", id: 568494494
 mas "The Unarchiver", id: 425424353
-mas "Unsplash Wallpapers", id: 1284863847

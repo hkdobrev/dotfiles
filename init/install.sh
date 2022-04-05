@@ -25,8 +25,4 @@ sudo bash -c "echo /usr/local/bin/bash >> /private/etc/shells"
 
 # Change the shell for the user
 chsh -s /usr/local/bin/bash
-
-# =========== Vim =============
-
-# Install vim-plug plugin manager
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+chsh -s /opt/homebrew/bin/bash

@@ -8,8 +8,8 @@
     "resume": "^0.4.8"
   },
   "dependencies": {
-    "axios": "/Users/hkdobrev/node_modules0.21.0",
-    "firebase-admin": "/Users/hkdobrev/node_modules9.4.1",
-    "firebase-idtoken-getter": "/Users/hkdobrev/node_modules1.0.3"
+    "axios": "^.21.0",
+    "firebase-admin": "^9.4.1",
+    "firebase-idtoken-getter": "^1.0.3"
   }
 }

@@ -34,19 +34,12 @@
     # Shorthand for branch --merged
     bm = branch --merged
 
-    # Shorthand for browse
-    # See`hub help browse`
-    br = !hub browse
-
     # Shorthand for commit
     c = commit
 
     # Unlearn checkout shortcuts, use switch and restore since Git 2.23.
     ch = "!f() { echo 'Did you mean to checkout a branch or a file?'; echo 'Use git sw for switching a branch.'; echo 'Use git restore for restoring a file in the working tree.'; exit 1; }; f"
     chb = "!f() { echo 'Did you mean to create a new branch?'; echo 'Use git swtch -c or the git swc shortcut instead!'; exit 1; }; f"
-
-    # Show GitHub Checks / Commit Status
-    ci = !hub ci-status --verbose
 
     # Shorthand for clone
     cl = clone
@@ -141,9 +134,6 @@
 
     # Shorthand for pull
     pl = pull --ff-only --rebase
-
-    # List pull requests via hub
-    prs = !hub pr list
 
     # Create a new remote branch with the same name and track it.
     # First argument is remote name. Defaults to "origin".

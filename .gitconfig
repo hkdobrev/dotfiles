@@ -330,6 +330,9 @@
     file = ~/.mailmap
 
 [merge]
+    # Include merged common ancestor with ||||||| separator in the merge conflicts
+    conflictStyle = diff3
+
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 

@@ -1,15 +1,7 @@
 {
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^2.4.0",
-    "gulp": "^3.9.0",
-    "jslint": "^0.9.6",
-    "license-to-fail": "^3.0.0",
-    "resume": "^0.4.8"
   },
   "dependencies": {
-    "axios": "^.21.0",
-    "firebase-admin": "^9.4.1",
-    "firebase-idtoken-getter": "^1.0.3"
   }
 }

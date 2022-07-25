@@ -83,7 +83,6 @@ brew 'rbenv'
 brew 'rbenv-binstubs'
 brew 'rename'
 brew 'ssh-copy-id', link: true
-brew 'subliminal'
 brew 'terraform'
 brew 'terraform-docs'
 brew 'titlecase'

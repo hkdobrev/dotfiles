@@ -10,6 +10,10 @@ export MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/man:$MANPATH"
 
 # Add Yarn and npm global binaries to the `$PATH`
 # export PATH="$HOME/.config/yarn/global/node_modules/.bin:$(npm --global prefix)/bin:$PATH"
+#
+
+# Use non-brew node packages
+export PATH="$HOME/.npm-packages/bin:$PATH"
 
 # Add rbenv to PATH
 export PATH="$HOME/.rbenv/bin:$PATH"

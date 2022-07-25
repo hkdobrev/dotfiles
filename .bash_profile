@@ -1,4 +1,3 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
@@ -28,7 +27,8 @@ done;
 # Disable programmable completion which could escape dollars while doing tab completion
 #shopt -u progcomp
 
-if command -v brew >/dev/null; then
+if [ -f /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
     export PATH="$HOMEBREW_PREFIX/local/opt/mysql@5.7/bin:$PATH"
 
 #    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
@@ -54,17 +54,22 @@ if command -v brew >/dev/null; then
         complete -o default -o nospace -F __git_wrap__git_main git;
         complete -o default -o nospace -F __git_wrap__git_main g;
     fi;
+
+    # Enable terraform completion
+    complete -C "$HOMEBREW_PREFIX/local/bin/terraform" terraform
+    complete -C terraform tf
+
+    # Minio completion
+    complete -C "$HOMEBREW_PREFIX/local/bin/mc" mc
+
+    # nvm setup
+    [ -s "$HOMEBREW_PREFIX/local/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/local/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "$HOMEBREW_PREFIX/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "$BREW_PREFIX/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completio
+
 elif [ -f /etc/bash_completion ]; then
     # If brew bash completion is not available, add basic bash completion
     source /etc/bash_completion;
 fi
-
-# Enable terraform completion
-complete -C "$HOMEBREW_PREFIX/local/bin/terraform" terraform
-complete -C terraform tf
-
-# Minio completion
-complete -C "$HOMEBREW_PREFIX/local/bin/mc" mc
 
 # Add tab completion for dbt
 if [ -f ~/.dbt-completion.bash ]; then
@@ -97,6 +102,3 @@ fi;
 
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$HOMEBREW_PREFIX/local/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "$HOMEBREW_PREFIX/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "$BREW_PREFIX/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completio

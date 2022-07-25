@@ -19,18 +19,12 @@ brew 'bash'
 brew 'bash-completion@2'
 
 # Install useful completions
-brew 'apm-bash-completion'
 brew 'brew-cask-completion'
-brew 'bundler-completion'
 # brew 'composer-completion'
 brew 'gem-completion'
 brew 'launchctl-completion'
 brew 'open-completion'
-brew 'open-completion'
-brew 'pip-completion'
-brew 'rake-completion'
 brew 'ruby-completion'
-brew 'vagrant-completion'
 brew 'yarn-completion'
 
 # Install more recent versions of some OS X tools

@@ -34,9 +34,6 @@ brew 'grep'
 brew 'screen'
 brew 'zlib'
 
-# Install PHP
-brew 'php@8.0', link: true
-
 # Install other useful binaries
 brew 'ack'
 brew 'aria2'

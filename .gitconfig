@@ -138,7 +138,7 @@
     # Create a new remote branch with the same name and track it.
     # First argument is remote name. Defaults to "origin".
     # Second, third and fourth argument are passed to `git push`.
-    publish = "!p() { [ -z \"$1\" ] && remote=\"origin\" || remote=$1; git push --set-upstream $2 $3 $4 $remote HEAD; }; p"
+    publish = "!p() { echo 'With push.AutoSetUpRemote there is no need to use the publish alias. Use push.' exit 1; }; p"
 
     # Push force with a check if all the commits you are overriding on the remote
     # were previously present in the remote reference in your repository.
@@ -379,6 +379,10 @@
     # Setting to Git 2.0 default to surpress warning message
     # If you use branches with different remote name, use "upstream"
     default = simple
+
+    # Assume --set-upstream on default push when no upstream tracking
+    # exists for the current branch
+    autoSetupRemote = true
 
 [rebase]
     # Use --autosquash by default. It's not like one would write !fixup message by accident.

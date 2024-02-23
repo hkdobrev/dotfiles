@@ -402,6 +402,10 @@
     # Show all untracked files in untracked directories
     showUntrackedFiles = all
 
+[submodule]
+    # Automatically update submodules when pulling
+    recurse = true
+
 [tag]
     gpgSign = true
 

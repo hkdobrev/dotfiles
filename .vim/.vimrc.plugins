@@ -41,7 +41,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'aklt/plantuml-syntax'
 
 " Themes
-Plug 'ajh17/Spacegray.vim'
+Plug 'vim-scripts/Spacegray.vim'
 " Plug 'bling/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 

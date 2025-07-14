@@ -40,3 +40,4 @@ export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export ANDROID_HOME=~/Library/Android/sdk
+export TERM_PROGRAM="iTerm"

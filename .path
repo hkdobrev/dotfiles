@@ -1,7 +1,8 @@
-# Load GNU coreutils into PATH
-export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
+# Alias GNU coreutils so they are not in PATH for interactive scripts like brew
+# They would not break compilation, but would work like GNU in interactive shell
+for bin in "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"/* "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin"/* "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"/*; do
+    alias "$(basename "$bin")"="$bin"
+done
 
 # Discover GNU coreutils man pages
 export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/man:$MANPATH"

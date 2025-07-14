@@ -29,6 +29,6 @@ export PATH=$PATH:$HOME/Library/Python/3.7/bin
 export PATH="$HOME/bin:$PATH";
 export PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
-export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk@11"
 export PATH="$HOMEBREW_PREFIX/opt/openjdk@11/bin:$PATH"
 export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/openjdk@11/include"
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools

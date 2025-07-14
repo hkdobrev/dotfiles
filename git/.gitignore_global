@@ -37,6 +37,8 @@ Thumbs.db
 *.rar
 *.tar
 *.zip
+*.aab
+*.apk
 
 # Logs and databases #
 ######################

@@ -21,8 +21,6 @@ done;
 
 if [ -f /opt/homebrew/bin/brew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-    export PATH="$HOMEBREW_PREFIX/local/opt/mysql@5.7/bin:$PATH"
-
 #    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
 #        source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 #      else
@@ -54,9 +52,9 @@ if [ -f /opt/homebrew/bin/brew ]; then
     # Minio completion
     complete -C "$HOMEBREW_PREFIX/local/bin/mc" mc
 
-    # nvm setup
-    [ -s "$HOMEBREW_PREFIX/local/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/local/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "$HOMEBREW_PREFIX/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "$BREW_PREFIX/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completio
+    # export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completionnvm setup
 
 elif [ -f /etc/bash_completion ]; then
     # If brew bash completion is not available, add basic bash completion

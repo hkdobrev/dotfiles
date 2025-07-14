@@ -75,7 +75,8 @@
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Remove branches that have already been merged with main
-    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+    # Also remove local references to remotely deleted branches 
+    dm = "!git remote | xargs -n1 git remote prune && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
     # Shorthand for fetch
     f = fetch
@@ -182,7 +183,7 @@
     sw = switch
 
     # Create branch
-    swc = switch --create
+    swc = switch --no-track --create
 
     # Shorthand for stash
     st = stash
@@ -202,7 +203,12 @@
     # Detect whitespace errors when applying a patch
     # whitespace = warn
 
+[branch]
+    sort = committerdate
+
 [color]
+    colorMoved = default
+
     # Use colors in Git commands that are capable of colored output when
     # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
     ui = auto
@@ -239,6 +245,8 @@
     # Set a template for writing commit messages in the editor
     template = ~/git/.gitmessage
 
+    verbose = true
+
 [core]
     # Global `.gitattributes`
     attributesfile = ~/git/.gitattributes
@@ -250,7 +258,7 @@
     # Global `.gitignore`
     excludesfile = ~/git/.gitignore_global
 
-    pager = diff-so-fancy | less --tabs=4
+    pager = delta
 
     # Make `git rebase` safer on OS X
     # More info: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx
@@ -267,14 +275,29 @@
     # as an error.
     whitespace = space-before-tab,trailing-space,tab-in-indent
 
+[delta]
+    dark = true
+    hyperlinks = true
+    hyperlinks-file-link-format = "cursor://file/{path}:{line}"
+    navigate = true
+    diff-so-fancy = true
+    side-by-side = false
+    file-style= bold
+    true-color = always
+    theme = colibri
+
 [diff]
     # Use more time to create better diffs.
     # E.g. matching opening/closing braces from neighbour functions.
-    # See "`git help diff` --patience" and "`git help merge` recursive".
-    algorithm = patience
+    # See "`git help diff` --histogram" and "`git help merge` recursive".
+    algorithm = histogram
+
+    colorMoved = plain
 
     # Use blank lines as a strong hint to identify the changes
     compactionHeuristic = true
+
+    mnemonicPrefix = true
 
     # Diff will detect both renames and copies.
     renames = copies
@@ -288,24 +311,31 @@
 [diff "javascript"]
     xfuncname = "^\\s*(.*?\\bfunction\\b.*?\\(.*?\\))"
 
-[diff-so-fancy]
-    # Configure diff-so-fancy with ASCII separators
-    useUnicodeRuler = false
-
 [difftool]
     # Difftool will not prompt for every file.
     # Use --prompt to override.
     prompt = false
+
+[feature]
+    experimental = true
+
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
 
 [format]
     pretty = colourful
 
 [help]
     # Automatically correct and execute mistyped commands
-    autocorrect = 1
+    autocorrect = 2
 
 [gpg]
     program = gpg
+
+[grep]
+    patternType = perl
 
 [include]
     # Additional Git configuration per machine not committed to the dotfiles repo
@@ -316,11 +346,11 @@
      # Useful for adding hooks by default
      # templatedir = ~/git/.git-template
 
-    # Intialise repos with the default branch called main
+    # Initialise repos with the default branch called main
     defaultBranch = main
 
 [interactive]
-    # diffFilter = diff-so-fancy | less --tabs=4 --tilde --status-column --HILITE-UNREAD
+    diffFilter = delta --color-only
 
 [log]
     # Always use .mailmap resolution of author names and emails in git-log
@@ -330,8 +360,9 @@
     file = ~/.mailmap
 
 [merge]
-    # Include merged common ancestor with ||||||| separator in the merge conflicts
-    conflictStyle = diff3
+    # diff3 include merged common ancestor with ||||||| separator in the merge conflicts
+    # zdiff3 specifically removes common lines in the ancestor section, helpful for complex merges
+    conflictStyle = zdiff3
 
     # Include summaries of merged commits in newly created merge commit messages
     log = true
@@ -355,7 +386,6 @@
     prompt = false
 
 [mergetool.fac]
-
     cmd = fac
 
 [pager]
@@ -363,7 +393,7 @@
     color = true
 
     # diff = diff-so-fancy | less --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --tilde --status-column --HILITE-UNREAD
-    show = diff-so-fancy | less --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --tilde --status-column --HILITE-UNREAD
+    # show = diff-so-fancy | less --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --tilde --status-column --HILITE-UNREAD
 
 [protocol]
     # Use faster Git protocol
@@ -372,6 +402,10 @@
 [pretty]
     colourful = "format:%Cred%<(8)%h%Creset %<(75,trunc)%s %Cgreen%<(11)%cr%Creset%Cblue%<(17)% aN%Creset%C(yellow)% D%Creset %gN"
     live = "format:%Cred%<(6)%h%Creset %<(50,trunc)%s%C(yellow)% D%Creset %gN"
+
+[pull]
+    # Pull with rebase by default
+	rebase = true
 
 [push]
     # See `git help config` and search for "push.default"
@@ -384,6 +418,8 @@
     # exists for the current branch
     autoSetupRemote = true
 
+    # Push tags pointing to commits being tagged
+    followTags = true
 [rebase]
     # Use --autosquash by default. It's not like one would write !fixup message by accident.
     autoSquash = true
@@ -394,9 +430,14 @@
     # Warn about removed commits in interactive mode
     missingCommitsCheck = warn
 
+    # Automatically update dependent branches during rebase
+    updateRefs = true
+
 [rerere]
     # Reuse recorded resolutions
     enabled = true
+
+    autoupdate = true
 
 [status]
     # Show all untracked files in untracked directories
@@ -407,12 +448,13 @@
     recurse = true
 
 [tag]
-    gpgSign = true
+    gpgSign = false
+    sort = version:refname
 
 [trailer]
     # Configure commit message trailer handling in Git Duet
     # See https://github.com/git-duet/git-duet#co-authored-by-trailer-support
-    ifexists = addIfDifferent
+    # ifexists = addIfDifferent
 
 # URL shorthands
 # 
@@ -420,26 +462,28 @@
 # 
 # gh: is a shorthand for git@github.com
 [url "git@github.com:"]
-
     insteadOf = "gh:"
     pushInsteadOf = "github:"
     pushInsteadOf = "git://github.com/"
 
+# gl: is a shorthand of git@gitlab.com
+[url "git@gitlab.com:"]
+    insteadOf = "gl:"
+    pushInsteadOf = "gitlab:"
+    pushInsteadOf = "git://gitlab.com/"
+
 # github: is a shorthand for git://github.com/
 [url "git://github.com/"]
-
     insteadOf = "github:"
 
 # gst: is a shorthand for git://gist.github.com/
 [url "git@gist.github.com:"]
-
     insteadOf = "gst:"
     pushInsteadOf = "gist:"
     pushInsteadOf = "git://gist.github.com/"
 
 # gist: is a shofthand for git://gist.github.com/
 [url "git://gist.github.com/"]
-
     insteadOf = "gist:"
 
 # Instruct Git to not guess user.name and user.email, but only allow

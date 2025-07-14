@@ -49,6 +49,7 @@ brew 'diff-so-fancy'
 brew 'docker-compose'
 brew 'dust'
 brew 'exa'
+brew 'caarlos0/tap/fork-cleaner'
 brew 'fzf'
 brew 'gcc'
 brew 'gh'
@@ -128,6 +129,7 @@ cask 'zoom'
 
 # Quick Look plugins
 # See https://github.com/sindresorhus/quick-look-plugins
+cask 'qlmarkdown'
 cask 'quicklook-csv'
 cask 'quicklook-json'
 cask 'suspicious-package'

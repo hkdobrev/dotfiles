@@ -1,7 +1,6 @@
 {
   "license": "MIT",
-  "devDependencies": {
-  },
   "dependencies": {
+    "jsonresume-theme-eloquent": "^5.0.0"
   }
 }

@@ -1,4 +1,4 @@
-bind -f ~/.inputrc
+[[ $- == *i* ]] && bind -f ~/.inputrc
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;

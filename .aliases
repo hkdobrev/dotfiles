@@ -6,6 +6,7 @@ alias .....="cd ../../../.."
 
 # Shortcuts
 alias c="cursor"
+alias cc="claude --allow-dangerously-skip-permissions"
 alias d="cd ~/Documents"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"

@@ -79,3 +79,5 @@ id_rsa
 
 # Temporary files - both manually and automatically created
 *.tmp
+
+settings.local.json

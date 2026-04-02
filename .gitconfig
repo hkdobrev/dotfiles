@@ -75,8 +75,9 @@
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Remove branches that have already been merged with main
-    # Also remove local references to remotely deleted branches 
-    dm = "!git remote | xargs -n1 git remote prune && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+    # Also remove local references to remotely deleted branches
+    # Also remove worktrees for branches whose remote is gone
+	dm = "!git remote | xargs -n1 git remote prune && git worktree list --porcelain | awk '/^worktree /{path=$0; sub(/^worktree /,\"\",path)} /^branch refs\\/heads\\//{b=$0; sub(/^branch refs\\/heads\\//,\"\",b); wt[b]=path} END{for(b in wt) print b \"\\t\" wt[b]}' | while IFS=\"\t\" read -r b path; do git branch -r --list \"origin/$b\" | grep -q . && continue; if git -C \"$path\" diff --quiet HEAD 2>/dev/null && [ -z \"$(git -C \"$path\" status --porcelain 2>/dev/null)\" ]; then git worktree remove \"$path\"; else echo \"Skipping $b ($path): has uncommitted/untracked changes\"; fi; done && git worktree prune && git branch --merged | grep -v \"\\\\*\" | xargs -n 1 git branch -d"
 
     # Shorthand for fetch
     f = fetch

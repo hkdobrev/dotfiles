@@ -1,80 +1,33 @@
+# Guard against the ~/.bash_profile <-> ~/.bashrc mutual-source loop that otherwise
+# hangs every interactive shell (.bash_profile sources .bashrc at the bottom, and
+# .bashrc sources .bash_profile when $PS1 is set). Load this file at most once.
+[[ -n $__DOTFILES_PROFILE_LOADED ]] && return
+__DOTFILES_PROFILE_LOADED=1
+
 [[ $- == *i* ]] && bind -f ~/.inputrc
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 # Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob;
+# shopt -s nocaseglob;
 
 # Append to the Bash history file, rather than overwriting it
-shopt -s histappend;
+# shopt -s histappend;
 
 # Autocorrect typos in path names when using `cd`
-shopt -s cdspell;
+# shopt -s cdspell;
 
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
-for option in autocd globstar; do
+for option in autocd globstar cmdhist lithist histappend nocaseglob nocasematch cdspell no_empty_cmd_completion; do
     shopt -s "$option" 2> /dev/null;
 done;
 
-# Disable programmable completion which could escape dollars while doing tab completion
-#shopt -u progcomp
-
 if [ -f /opt/homebrew/bin/brew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-#    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-#        source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-#      else
-#        for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-#          [[ -r "$COMPLETION" ]] && source "$COMPLETION"
-#        done
-#      fi
-
-    # Add bash completion for brew installed formuale
-    [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-    # Brew & Cask aliases
-    alias b="brew"
-    alias cask="brew cask"
-
-    # Enable brew command autocompletion for `b` alias as well
-    complete -o default -F _brew b
-
-    # Enable tab completion for `g` alias of git
-    if [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-completion.bash" ]; then
-        complete -o default -o nospace -F __git_wrap__git_main git;
-        complete -o default -o nospace -F __git_wrap__git_main g;
-    fi;
-
-    # Enable terraform completion
-    complete -C "$HOMEBREW_PREFIX/local/bin/terraform" terraform
-    complete -C terraform tf
-
-    # Minio completion
-    complete -C "$HOMEBREW_PREFIX/local/bin/mc" mc
-
-    # export NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completionnvm setup
-
-elif [ -f /etc/bash_completion ]; then
-    # If brew bash completion is not available, add basic bash completion
-    source /etc/bash_completion;
 fi
-
-# Add tab completion for dbt
-if [ -f ~/.dbt-completion.bash ]; then
-    source ~/.dbt-completion.bash
-fi
-
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config ~/.ssh/config.d/* | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
-
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults;
-
-# Add `killall` tab completion for common apps
-complete -o "nospace" -W "Dock Finder SystemUIServer" killall;
 
 # Enable Shell integration for iTerm2
 # http://iterm2.com/shell_integration.html
@@ -87,20 +40,34 @@ if command -v rbenv > /dev/null; then
     eval "$(rbenv init -)"
 fi;
 
-# added by travis gem
-[ -f /Users/hkdobrev/.travis/travis.sh ] && source /Users/hkdobrev/.travis/travis.sh
-
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-
-complete -C /opt/homebrew/bin/mc mc
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,completion}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
+export PATH="$HOME/.local/bin:$PATH"
 
+export PATH=$PATH:$HOME/.maestro/bin
+
+# pnpm
+export PNPM_HOME="/Users/hkdobrev/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Google Cloud SDK (installed via Homebrew cask, 2026-05-19)
+if [ -f '/opt/homebrew/share/google-cloud-sdk/path.bash.inc' ]; then
+  . '/opt/homebrew/share/google-cloud-sdk/path.bash.inc'
+fi
+if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.bash.inc' ]; then
+  . '/opt/homebrew/share/google-cloud-sdk/completion.bash.inc'
+fi
+
+[[ -r ~/.bashrc ]] && source ~/.bashrc

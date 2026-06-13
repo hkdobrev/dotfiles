@@ -65,7 +65,7 @@ brew 'goaccess'
 brew 'graphviz'
 brew 'grip'
 brew 'httpie'
-brew 'htop-osx'
+brew 'htop'
 brew 'http-prompt'
 brew 'jp2a'
 brew 'jpegoptim'
@@ -73,9 +73,9 @@ brew 'jq'
 brew 'jrnl'
 brew 'jsonlint'
 brew 'tdewolff/tap/minify'
+brew 'minio'
 brew 'node' # This installs `npm` too using the recommended installation method
 brew 'openjdk'
-brew 'openssl@1.1'
 brew 'optipng'
 brew 'p7zip'
 brew 'pigz'
@@ -86,45 +86,29 @@ brew 'rbenv'
 brew 'rbenv-binstubs'
 brew 'rename'
 brew 'ssh-copy-id', link: true
-brew 'terraform'
+brew 'opentofu'
 brew 'terraform-docs'
 brew 'titlecase'
 brew 'tldr'
 brew 'tree'
 brew 'unar'
 brew 'webkit2png'
-brew 'wget', ags: ['with-iri']
+brew 'wget'
 brew 'yamllint'
 brew 'yarn'
-brew 'youtube-dl'
+brew 'yt-dlp'
 brew 'zopfli'
 
-# Install Brew Cask along with Desktop apps
-tap 'homebrew/cask'
-# SVN is a prerequisite for installing fonts from Homebrew
-brew 'svn'
-tap 'homebrew/cask-fonts'
-tap 'homebrew/cask-versions'
-
-cask '1password-beta'
-cask '1password-cli'
-cask 'docker'
-cask 'font-source-code-pro'
-cask 'font-source-sans-pro'
+# Desktop apps via Cask (homebrew/cask is built-in; fonts & versions are merged in)
+cask '1password'
+cask 'font-source-sans-3'
 cask 'google-chrome'
 cask 'haptickey'
-cask 'hey'
-cask 'iterm2-beta'
-cask 'licecap'
+cask 'hey-desktop'
+cask 'iterm2'
 cask 'meetingbar'
-# cask 'protonvpn'
-cask 'rescuetime'
-cask 'screenflick'
-cask 'slack-beta'
+cask 'slack'
 cask 'tableplus'
-cask 'tabula'
-cask 'telegram-desktop-dev'
-cask 'visual-studio-code'
 cask 'zoom'
 
 # Quick Look plugins
@@ -138,10 +122,8 @@ cask 'webpquicklook'
 # Mac App Store apps
 # Install mas cli for these to work
 # https://github.com/mas-cli/mas
-mas "AntiRSI", id: 442007571
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Pocket", id: 568494494
 mas "The Unarchiver", id: 425424353

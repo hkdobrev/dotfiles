@@ -22,9 +22,6 @@ path_append() {
 
 [[ $- == *i* ]] && bind -f ~/.inputrc
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
 # Case-insensitive globbing (used in pathname expansion)
 # shopt -s nocaseglob;
 
@@ -51,13 +48,11 @@ if [ -f ~/.iterm2_shell_integration.bash ]; then
     source ~/.iterm2_shell_integration.bash
 fi
 
-# Add `rbenv init` to the shell to enable shims and autocompletion. rbenv's own
-# output prepends the shims dir unconditionally (so it duplicates on `reload`);
-# add the shims idempotently ourselves and drop that line from the eval.
-if command -v rbenv > /dev/null; then
-    path_prepend "$HOME/.rbenv/shims"
-    eval "$(rbenv init - bash | grep -v '^export PATH=')"
-fi;
+# mise manages language runtimes (Ruby, Node, …) and replaces rbenv and nvm.
+# `mise activate` installs a shell hook and puts the runtime shims on $PATH.
+if command -v mise > /dev/null; then
+    eval "$(mise activate bash)"
+fi
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -91,6 +86,17 @@ path_prepend "$BUN_INSTALL/bin"
 
 # Mole shell completion
 if output="$(mole completion bash 2>/dev/null)"; then eval "$output"; fi
+
+# fzf: fuzzy completion + key bindings (Ctrl-T files, Alt-C cd). Ctrl-R is left
+# to atuin below, which initialises after fzf so it wins that binding.
+command -v fzf > /dev/null && eval "$(fzf --bash)"
+
+# zoxide: smarter `cd` that learns. `z <dir>` jumps, `zi` picks interactively.
+command -v zoxide > /dev/null && eval "$(zoxide init bash)"
+
+# atuin: shell history with fuzzy search on Ctrl-R. --disable-up-arrow keeps the
+# normal up-arrow; loading after fzf lets atuin own Ctrl-R.
+command -v atuin > /dev/null && eval "$(atuin init bash --disable-up-arrow)"
 
 [[ -r ~/.bashrc ]] && source ~/.bashrc
 

@@ -103,6 +103,15 @@ defaults -currentHost write com.apple.screensaver idleTime -int 300
 defaults -currentHost write com.apple.screensaver showClock -bool true
 
 ###############################################################################
+# Energy / power management                                                   #
+###############################################################################
+
+# Prevent automatic sleeping on power adapter when the display is off
+# (System Settings → Battery → Options). The display still sleeps; the system
+# does not. `-c` targets AC/charger power.
+sudo pmset -c sleep 0
+
+###############################################################################
 # Finder                                                                      #
 ###############################################################################
 

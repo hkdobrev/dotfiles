@@ -120,8 +120,9 @@ cask 'suspicious-package'
 cask 'webpquicklook'
 
 # Mac App Store apps
-# Install mas cli for these to work
-# https://github.com/mas-cli/mas
+# Requires the `mas` CLI (https://github.com/mas-cli/mas) and being signed in
+# to the App Store.
+brew 'mas'
 mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
 mas "Numbers", id: 409203825

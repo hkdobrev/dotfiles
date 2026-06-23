@@ -42,6 +42,7 @@ brew 'zlib'
 # Install other useful binaries
 brew 'ack'
 brew 'aria2'
+brew 'atuin' # magical shell history (fuzzy search, stats, sync)
 brew 'awk'
 brew 'awscli'
 brew 'bat'
@@ -54,6 +55,7 @@ brew 'direnv'
 brew 'docker-compose'
 brew 'dust'
 brew 'eza'
+brew 'fd' # fast, ergonomic `find` replacement (also powers fzf)
 brew 'caarlos0/tap/fork-cleaner'
 brew 'fzf'
 brew 'gcc'
@@ -80,6 +82,7 @@ brew 'jrnl'
 brew 'jsonlint'
 brew 'tdewolff/tap/minify'
 brew 'minio'
+brew 'mise' # unified runtime manager (Ruby, Node, …) — replaces rbenv & nvm
 brew 'node' # This installs `npm` too using the recommended installation method
 brew 'optipng'
 brew 'p7zip'
@@ -87,8 +90,6 @@ brew 'pigz'
 brew 'postgresql'
 brew 'pv'
 brew 'python3'
-brew 'rbenv'
-brew 'rbenv-binstubs'
 brew 'rename'
 brew 'ssh-copy-id', link: true
 brew 'opentofu'
@@ -103,6 +104,7 @@ brew 'yamllint'
 brew 'yarn'
 brew 'yt-dlp'
 brew 'zopfli'
+brew 'zoxide' # smarter `cd` that learns your most-used directories
 
 # Desktop apps, CLI tools & runtimes via Cask
 # (homebrew/cask is built-in; fonts & versions are merged in)

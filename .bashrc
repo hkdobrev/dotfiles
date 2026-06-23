@@ -1,7 +1,7 @@
 [ -n "$PS1" ] && source ~/.bash_profile;
 
 
-eval "$(direnv hook bash)"
+command -v direnv >/dev/null && eval "$(direnv hook bash)"
 
 
 # >>> grok installer >>>

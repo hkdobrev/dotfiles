@@ -100,11 +100,13 @@ brew 'tree'
 brew 'unar'
 brew 'webkit2png'
 brew 'wget'
+brew 'xz' # .xz (de)compression — used by the `extract` function
 brew 'yamllint'
 brew 'yarn'
 brew 'yt-dlp'
 brew 'zopfli'
 brew 'zoxide' # smarter `cd` that learns your most-used directories
+brew 'zstd' # .zst (de)compression — used by the `extract` function
 
 # Desktop apps, CLI tools & runtimes via Cask
 # (homebrew/cask is built-in; fonts & versions are merged in)

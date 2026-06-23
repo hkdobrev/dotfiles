@@ -1,0 +1,249 @@
+#!/usr/bin/env bash
+
+# ~/.macos — macOS system preferences for a new Mac.
+#
+# Modelled on Mathias Bynens' https://mths.be/macos, but the values below were
+# captured from Haralan's own machine (Dock, Finder, trackpad, Mission Control,
+# Stage Manager, menu bar, keyboard shortcuts, …) so running this on a fresh Mac
+# reproduces this setup rather than Mathias' opinions.
+#
+# Review before running — then:  ./.macos
+# Some changes need a logout/restart to take effect.
+
+# Close any open System Settings panes, to prevent them from overriding
+# settings we're about to change.
+osascript -e 'tell application "System Settings" to quit' 2>/dev/null
+
+# Ask for the administrator password upfront.
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished.
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Resolve the directory this script lives in (= the dotfiles repo / $HOME) so we
+# can find the companion plist files regardless of the current directory.
+MACOS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+###############################################################################
+# General UI/UX                                                               #
+###############################################################################
+
+# Use the Dark appearance.
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
+# Show scroll bars only when scrolling.
+defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+
+# Jump to the spot that's clicked on the scroll bar.
+defaults write NSGlobalDomain AppleScrollerPagingBehavior -int 1
+
+# Prefer tabs when opening documents ("always").
+defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
+
+# Don't minimise windows on a double-click of the title bar.
+defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
+
+# Show all filename extensions.
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Full keyboard access: Tab moves focus between all controls, not just text
+# boxes and lists.
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+
+# Disable "swipe between pages" with two fingers + scroll.
+defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool false
+
+# Disable the automatic text "corrections" — they get in the way when coding.
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
+
+###############################################################################
+# Trackpad, mouse & keyboard                                                  #
+###############################################################################
+
+# Tap to click (built-in trackpad, Magic Trackpad and at the login screen).
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Disable Force Click and haptic feedback.
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool false
+
+# Disable the three-finger tap (look up / data detectors).
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
+
+###############################################################################
+# Screen & screen saver                                                       #
+###############################################################################
+
+# Start the screen saver after 5 minutes, and show the clock on it.
+defaults -currentHost write com.apple.screensaver idleTime -int 300
+defaults -currentHost write com.apple.screensaver showClock -bool true
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# Use list view in all Finder windows by default.
+# Four-letter codes: `Nlsv` list, `icnv` icon, `clmv` column, `glyv` gallery.
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+# Open new Finder windows in the Downloads folder.
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
+
+# Show the path bar and status bar.
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Keep the desktop clean — don't show drives, removable media or servers on it.
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+
+# Don't show Recent Tags in the sidebar.
+defaults write com.apple.finder ShowRecentTags -bool false
+
+# Remove items from the Trash automatically after 30 days.
+defaults write com.apple.finder FXRemoveOldTrashItems -bool true
+
+# Group/arrange by name.
+defaults write com.apple.finder FXArrangeGroupViewBy -string "Name"
+
+###############################################################################
+# Dock                                                                        #
+###############################################################################
+
+# Position the Dock on the right edge.
+defaults write com.apple.dock orientation -string "right"
+
+# Icon size of 64 px (and a 128 px magnified size, even though magnification is
+# off — keeps the slider where it was).
+defaults write com.apple.dock tilesize -int 64
+defaults write com.apple.dock largesize -int 128
+defaults write com.apple.dock magnification -bool false
+
+# Automatically hide and show the Dock, instantly.
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0.1
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Don't animate opening applications, and use the scale minimise effect.
+defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock mineffect -string "scale"
+
+# Minimise windows into their application's icon.
+defaults write com.apple.dock minimize-to-application -bool false
+
+# Make hidden apps' Dock icons translucent.
+defaults write com.apple.dock showhidden -bool true
+
+# Don't show recently used apps in the Dock.
+defaults write com.apple.dock show-recents -bool false
+
+###############################################################################
+# Mission Control                                                             #
+###############################################################################
+
+# Don't automatically rearrange Spaces based on most recent use.
+defaults write com.apple.dock mru-spaces -bool false
+
+# Group windows by application in Mission Control / App Exposé.
+defaults write com.apple.dock expose-group-apps -bool true
+
+# When switching apps, switch to a window on the current display / all displays.
+defaults write com.apple.dock appswitcher-all-displays -bool true
+
+# Enable the App Exposé trackpad gesture (swipe down with three/four fingers).
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+
+# Hot corners. Codes: 1 disabled, 2 Mission Control, 3 app windows, 4 desktop,
+# 5 start screen saver, 10 sleep display, 11 Launchpad, 12 Notification Centre,
+# 13 Lock Screen, 14 Quick Note. Modifiers: 0 none, 131072 ⇧, 262144 ⌃,
+# 524288 ⌥, 1048576 ⌘.
+defaults write com.apple.dock wvous-tl-corner -int 1
+defaults write com.apple.dock wvous-tl-modifier -int 0
+defaults write com.apple.dock wvous-bl-corner -int 1
+defaults write com.apple.dock wvous-bl-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 1
+defaults write com.apple.dock wvous-br-modifier -int 1048576
+
+###############################################################################
+# Stage Manager & desktop (Sonoma/Sequoia)                                    #
+###############################################################################
+
+# Stage Manager off.
+defaults write com.apple.WindowManager GloballyEnabled -bool false
+
+# Hide desktop icons/widgets until the wallpaper is clicked.
+defaults write com.apple.WindowManager HideDesktop -bool true
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool true
+
+# Disable dragging windows to the screen edge to tile them (and the margins).
+defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTopTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
+
+###############################################################################
+# Menu bar & Control Center                                                   #
+###############################################################################
+
+# Use a 24-hour clock without the day of week / month in the menu bar.
+defaults write com.apple.menuextra.clock Show24Hour -bool true
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool false
+defaults write com.apple.menuextra.clock ShowDayOfMonth -bool false
+
+# Keep the menu bar tidy — hide a few Control Center items.
+# (Menu-bar item handling is macOS-version specific; treat as best-effort.)
+defaults write com.apple.controlcenter "NSStatusItem Visible AirDrop" -bool false
+defaults write com.apple.controlcenter "NSStatusItem Visible StageManager" -bool false
+defaults write com.apple.controlcenter "NSStatusItem Visible ScreenMirroring" -bool false
+defaults write com.apple.controlcenter "NSStatusItem Visible Shortcuts" -bool false
+
+###############################################################################
+# Keyboard shortcuts                                                          #
+###############################################################################
+
+# The keyboard shortcuts (System Settings → Keyboard → Keyboard Shortcuts) are
+# too numerous and fiddly to express as individual `defaults write` calls —
+# many default shortcuts are disabled. They're captured verbatim in the
+# companion plist and imported here as a whole.
+if [ -f "${MACOS_DIR}/init/com.apple.symbolichotkeys.plist" ]; then
+	defaults import com.apple.symbolichotkeys "${MACOS_DIR}/init/com.apple.symbolichotkeys.plist"
+fi
+
+###############################################################################
+# Not scriptable — apply these by hand on the new Mac                         #
+###############################################################################
+
+# Notifications (System Settings → Notifications): per-app notification
+#   settings live in com.apple.ncprefs as an opaque binary blob and cannot be
+#   reliably reproduced with `defaults`. Set them manually, or migrate them.
+#
+# Displays (arrangement, resolution, scaling, brightness, Night Shift, True
+#   Tone): tied to the specific monitors/hardware, not stored as plain
+#   defaults. Configure once per machine.
+#
+# Login items, Focus modes, Wallpaper and Touch ID: configure in System
+#   Settings.
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
+
+for app in "cfprefsd" \
+	"ControlCenter" \
+	"Dock" \
+	"Finder" \
+	"SystemUIServer" \
+	"Google Chrome"; do
+	killall "${app}" &> /dev/null
+done
+echo "Done. Some changes require a logout/restart to take effect."

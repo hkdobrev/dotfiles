@@ -11,19 +11,41 @@ The repository is made for use inside your `$HOME` directory. It will ignore eve
 ``` bash
 cd $HOME
 git init
-git remote add origin git@github.com:hkdobrev/dotfiles.git
+# Use HTTPS for the first fetch — a brand-new Mac has no SSH key yet.
+git remote add origin https://github.com/hkdobrev/dotfiles.git
 git fetch origin main
 git reset --hard origin/main
+```
+
+Once an SSH key is set up (e.g. via the 1Password SSH agent) you can switch the
+remote back to SSH:
+
+``` bash
+git remote set-url origin git@github.com:hkdobrev/dotfiles.git
 ```
 
 It is recommended to fork the repo and adjust it as needed.
 
 #### Installing initial tools
 
-When setting up a new computer use the `init/install.sh` script to install Homebrew, Homebrew bundle, rbenv, vim-plug, Composer, set up Bash 4 and the XCode CLI tools.
+When setting up a new computer use the `init/install.sh` script. It installs the
+Xcode Command Line Tools and Homebrew, then runs `brew bundle` over the
+`Brewfile` to install every formula, Cask app and Mac App Store app, and finally
+switches the login shell to the Homebrew Bash. It is idempotent, so it's safe to
+re-run. Sign in to the App Store first so the `mas` apps install.
 
 ``` bash
 ./init/install.sh
+```
+
+#### Applying macOS system preferences
+
+The `.macos` script applies this setup's macOS system settings (Dock, Finder,
+trackpad, Mission Control, Stage Manager, menu bar and keyboard shortcuts).
+Review it, then run it and restart:
+
+``` bash
+./.macos
 ```
 
 # Updating

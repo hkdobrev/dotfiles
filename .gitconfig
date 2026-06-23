@@ -241,7 +241,8 @@
     untracked = cyan
 
 [commit]
-    gpgSign = false
+    # Sign commits with the SSH key (see [gpg] format and [user] signingKey).
+    gpgSign = true
 
     # Set a template for writing commit messages in the editor
     template = ~/git/.gitmessage
@@ -334,6 +335,15 @@
 
 [gpg]
     program = gpg
+
+    # Sign with SSH keys instead of GPG — no GPG agent/keyring to manage, and it
+    # reuses the ~/.ssh/id_ed25519 key set up during install.
+    format = ssh
+
+[gpg "ssh"]
+    # Uncomment and populate to verify your own signatures locally with
+    # `git log --show-signature` (format: "<email> <ssh-key>"):
+    # allowedSignersFile = ~/git/allowed_signers
 
 [grep]
     patternType = perl
@@ -438,7 +448,7 @@
     recurse = true
 
 [tag]
-    gpgSign = false
+    gpgSign = true
     sort = version:refname
 
 # URL shorthands
@@ -475,6 +485,10 @@
 # commits if they are set in configuration
 [user]
     useConfigOnly = true
+
+    # SSH key used to sign commits/tags. Same key name the install sets up; if a
+    # machine uses a different key, override it in ~/git/.gitconfig.local.
+    signingKey = ~/.ssh/id_ed25519.pub
 [credential "https://github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential

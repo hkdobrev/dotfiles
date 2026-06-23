@@ -26,27 +26,39 @@ git remote set-url origin git@github.com:hkdobrev/dotfiles.git
 
 It is recommended to fork the repo and adjust it as needed.
 
-#### Installing initial tools
+#### Installing everything
 
-When setting up a new computer use the `init/install.sh` script. It installs the
-Xcode Command Line Tools and Homebrew, then runs `brew bundle` over the
-`Brewfile` to install every formula, Cask app and Mac App Store app, and finally
-switches the login shell to the Homebrew Bash. It is idempotent, so it's safe to
-re-run. Sign in to the App Store first so the `mas` apps install.
+When setting up a new computer run the `init/install.sh` script. It:
+
+1. installs the Xcode Command Line Tools and Homebrew,
+2. runs `brew bundle` over the `Brewfile` to install every formula, Cask app
+   and Mac App Store app,
+3. switches the login shell to the Homebrew Bash, and
+4. applies the macOS system preferences via `.macos` (Dock, Finder, trackpad,
+   Mission Control, Stage Manager, menu bar and keyboard shortcuts).
+
+It is idempotent, so it's safe to re-run. Sign in to the App Store first so the
+`mas` apps install.
 
 ``` bash
 ./init/install.sh
 ```
 
-#### Applying macOS system preferences
+The final `.macos` step asks for confirmation (it restarts Dock/Finder and
+quits a few apps). To run unattended and skip it:
 
-The `.macos` script applies this setup's macOS system settings (Dock, Finder,
-trackpad, Mission Control, Stage Manager, menu bar and keyboard shortcuts).
-Review it, then run it and restart:
+``` bash
+NO_MACOS=1 ./init/install.sh
+```
+
+You can also apply just the macOS preferences at any time by running the script
+directly:
 
 ``` bash
 ./.macos
 ```
+
+Some changes need a logout/restart to take effect.
 
 # Updating
 
@@ -90,10 +102,11 @@ You could also use `~/.extra` to override settings, functions and aliases from m
 
 ### Install Homebrew formulae and Cask apps
 
-When setting up a new Mac, you may want to install some common [Homebrew](http://brew.sh/) formulae (after installing Homebrew, of course):
+`init/install.sh` already runs `brew bundle` for you. To re-apply the
+[Homebrew](http://brew.sh/) `Brewfile` on its own later (e.g. after editing it):
 
 ```bash
-brew bundle ~/Brewfile
+brew bundle --file=~/Brewfile
 ```
 
 ## Feedback

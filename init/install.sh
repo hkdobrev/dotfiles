@@ -5,10 +5,14 @@
 #   * Homebrew
 #   * every formula, cask and Mac App Store app from the Brewfile
 #   * switch the login shell to the Homebrew Bash
+#   * apply macOS system preferences (./.macos)
 #
 # Run it from your $HOME, where this dotfiles repo lives:
 #
 #   ./init/install.sh
+#
+# It is idempotent — safe to re-run. Set NO_MACOS=1 to skip the .macos step
+# (e.g. for an unattended run): NO_MACOS=1 ./init/install.sh
 
 set -euo pipefail
 
@@ -84,4 +88,23 @@ if [ "${SHELL:-}" != "$BREW_BASH" ]; then
     chsh -s "$BREW_BASH"
 fi
 
-echo "Done. Open a new terminal, then run ./.macos to apply macOS system preferences."
+# ========= macOS system preferences =========
+
+# Apply this setup's macOS defaults (Dock, Finder, trackpad, Mission Control,
+# Stage Manager, menu bar and keyboard shortcuts). `.macos` is idempotent but
+# restarts Dock/Finder and quits a few apps, so confirm first when interactive.
+# Skip entirely with NO_MACOS=1.
+if [ "${NO_MACOS:-}" = 1 ]; then
+    echo "Skipping macOS preferences (NO_MACOS=1). Run ./.macos later to apply."
+else
+    reply=y
+    if [ -t 0 ]; then
+        read -r -p "Apply macOS system preferences now (runs ./.macos, restarts Dock/Finder)? [Y/n] " reply
+    fi
+    case "$reply" in
+        [nN]*) echo "Skipped .macos — run ./.macos later to apply." ;;
+        *)     "$DOTFILES/.macos" ;;
+    esac
+fi
+
+echo "Done. Open a new terminal so the new login shell and settings take effect."

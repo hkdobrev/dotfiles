@@ -295,17 +295,18 @@ fi
 # of sharing search queries with Apple. 2 = opted out.
 defaults write com.apple.assistant.support "Search Queries Data Sharing Status" -int 2
 
+# The "Results from Apps" sources and "Show Related Content" toggle are stored
+# in an opaque binary blob (com.apple.Spotlight `queryViewOptions`) on macOS
+# Tahoe, not as individual `defaults` keys — so import the captured domain as a
+# whole (like the keyboard shortcuts above). It enables results from only
+# Applications, Calculator and System Settings, with Show Related Content off.
+if [ -f "${MACOS_DIR}/init/com.apple.Spotlight.plist" ]; then
+	defaults import com.apple.Spotlight "${MACOS_DIR}/init/com.apple.Spotlight.plist"
+fi
+
 ###############################################################################
 # Not scriptable — apply these by hand on the new Mac                         #
 ###############################################################################
-
-# Spotlight "Results from Apps" and "Show Related Content" (System Settings →
-#   Spotlight): on macOS Tahoe these toggles are stored in an opaque binary blob
-#   (com.apple.Spotlight `queryViewOptions`), not stable `defaults` keys. Set by
-#   hand — turn off Show Related Content and enable results from only
-#   Applications, Calculator and System Settings. ("Help Apple Improve Search"
-#   is handled above.)
-#
 
 # Notifications (System Settings → Notifications): per-app notification
 #   settings live in com.apple.ncprefs as an opaque binary blob and cannot be

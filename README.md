@@ -1,112 +1,118 @@
 # hkdobrev’s dotfiles
 
-![Screenshot of my shell prompt](http://i.imgur.com/EkEtphC.png)
+My personal macOS dotfiles: the Homebrew Bash shell setup, aliases, functions,
+a thorough Git configuration, a `Brewfile` of every tool and app I install, and
+a `.macos` script that reproduces my system preferences. Built for Apple Silicon
+Macs.
 
 ## Installation
 
-### Using Git and the install script
+The repo is meant to live in your `$HOME` directory. It only tracks the files it
+already knows about and ignores everything else.
 
-The repository is made for use inside your `$HOME` directory. It will ignore everything other than what it explicitly is tracking already.
+A brand-new Mac has no SSH key yet, so clone over HTTPS first:
 
-``` bash
-cd $HOME
+```bash
+cd "$HOME"
 git init
-# Use HTTPS for the first fetch — a brand-new Mac has no SSH key yet.
 git remote add origin https://github.com/hkdobrev/dotfiles.git
 git fetch origin main
 git reset --hard origin/main
 ```
 
-Once an SSH key is set up (e.g. via the 1Password SSH agent) you can switch the
-remote back to SSH:
+> It is recommended to [fork the repo](https://github.com/hkdobrev/dotfiles/fork)
+> and adjust it to your own taste.
 
-``` bash
-git remote set-url origin git@github.com:hkdobrev/dotfiles.git
-```
+### Bootstrap with the install script
 
-It is recommended to fork the repo and adjust it as needed.
-
-#### Installing everything
-
-When setting up a new computer run the `init/install.sh` script. It:
+`init/install.sh` is the single entry point for a new machine. It:
 
 1. installs the Xcode Command Line Tools and Homebrew,
-2. runs `brew bundle` over the `Brewfile` to install every formula, Cask app
-   and Mac App Store app,
+2. runs `brew bundle` over the `Brewfile` — every formula, Cask app and Mac App
+   Store app (sign in to the App Store first so the `mas` apps install),
 3. switches the login shell to the Homebrew Bash, and
 4. applies the macOS system preferences via `.macos` (Dock, Finder, trackpad,
    Mission Control, Stage Manager, menu bar and keyboard shortcuts).
 
-It is idempotent, so it's safe to re-run. Sign in to the App Store first so the
-`mas` apps install.
-
-``` bash
+```bash
 ./init/install.sh
 ```
 
-The final `.macos` step asks for confirmation (it restarts Dock/Finder and
-quits a few apps). To run unattended and skip it:
+It is idempotent — safe to re-run. The final `.macos` step asks for confirmation
+(it restarts Dock/Finder and quits a few apps). To run unattended and skip it:
 
-``` bash
+```bash
 NO_MACOS=1 ./init/install.sh
 ```
 
-You can also apply just the macOS preferences at any time by running the script
-directly:
-
-``` bash
-./.macos
-```
-
-Some changes need a logout/restart to take effect.
-
-# Updating
-
-To later update the dotfiles configuration:
+You can also re-apply individual pieces at any time:
 
 ```bash
-cd
-git pull
+./.macos                       # just the macOS system preferences
+brew bundle --file=~/Brewfile  # just the Homebrew packages
 ```
 
-To update your software run the `update` alias which will update Ruby gems, Homebrew formulae, Composer globals and others:
+Some macOS changes need a logout/restart to take effect.
+
+### Switch the Git remote to SSH
+
+Once you have an SSH key, authenticate with GitHub and move the remote off HTTPS.
+The bundled `~/.ssh/config` uses the default `~/.ssh/id_ed25519` key name:
+
+```bash
+# Create a modern key (no passphrase) if you don't have one:
+ssh-keygen -t ed25519 -C "you@example.com"
+
+# Authenticate the GitHub CLI (installed via the Brewfile), wire it into Git,
+# and register the public key on your account:
+gh auth login
+gh auth setup-git
+gh ssh-key add ~/.ssh/id_ed25519.pub --title "$(hostname -s)"
+
+git remote set-url origin git@github.com:hkdobrev/dotfiles.git
+```
+
+## Updating
+
+Pull the latest dotfiles:
+
+```bash
+cd && git pull
+```
+
+Update all your software with the `update` alias (macOS software updates,
+Homebrew formulae and casks, npm globals and Ruby gems):
 
 ```bash
 update
 ```
 
-### Specify the `$PATH`
+## Customisation
 
-If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as [detecting which version of `ls` is being used](https://github.com/hkdobrev/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-26)) takes place.
+### `~/.path`
 
-Here’s an example `~/.path` file that adds `~/utils` to the `$PATH`:
+If `~/.path` exists it is sourced before the other files, so it can extend
+`$PATH` before any feature detection runs:
 
 ```bash
 export PATH="$HOME/utils:$PATH"
 ```
 
-### Add custom configuration without creating a new fork
+### `~/.extra`
 
-If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
+If `~/.extra` exists it is sourced as well. Use it for machine-specific or
+private settings, functions and aliases that you don't want to commit — a handy
+way to tweak things without forking the whole repo.
 
-Git would try to load additional configuration via `~/git/.gitconfig.local`. Use it to populate your own user information:
+### Per-machine Git identity
+
+Git loads additional configuration from `~/git/.gitconfig.local` (untracked).
+Use it to set your own identity:
 
 ```bash
-# Git credentials
 git config --file=~/git/.gitconfig.local user.name "John Doe"
-git config --file=~/git/.gitconfig.local user.email "jonh.doe@example.com"
+git config --file=~/git/.gitconfig.local user.email "john.doe@example.com"
 git config --file=~/git/.gitconfig.local user.signingKey "0xABCDE"
-```
-
-You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/hkdobrev/dotfiles/fork) for any significant changes, though.
-
-### Install Homebrew formulae and Cask apps
-
-`init/install.sh` already runs `brew bundle` for you. To re-apply the
-[Homebrew](http://brew.sh/) `Brewfile` on its own later (e.g. after editing it):
-
-```bash
-brew bundle --file=~/Brewfile
 ```
 
 ## Feedback
@@ -116,11 +122,11 @@ Suggestions/improvements
 
 ## Author
 
-| [![twitter/mathias](http://gravatar.com/avatar/24e08a9ea84deb17ae121074d0f17125?s=70)](http://twitter.com/mathias "Follow @mathias on Twitter") |
+| [Haralan Dobrev](https://hkdobrev.com/) |
 |---|
-| [Mathias Bynens](http://mathiasbynens.be/) |
 
-This repo is a fork of the originial dotfiles of Mathias Bynens, it is heavily modified by Haralan Dobrev for his own purposes.
+Originally forked from [Mathias Bynens’](https://mathiasbynens.be/) dotfiles and
+heavily modified since for my own purposes.
 
 ## Thanks to…
 
@@ -136,6 +142,4 @@ This repo is a fork of the originial dotfiles of Mathias Bynens, it is heavily m
 * [Sindre Sorhus](http://sindresorhus.com/)
 * [Tom Ryder](http://blog.sanctum.geek.nz/) and his [dotfiles repository](https://github.com/tejr/dotfiles)
 * [Kevin Suttle](http://kevinsuttle.com/) and his [dotfiles repository](https://github.com/kevinSuttle/dotfiles) and [OSXDefaults project](https://github.com/kevinSuttle/OSXDefaults), which aims to provide better documentation for [`~/.osx`](http://mths.be/osx)
-* [Haralan Dobrev](http://hkdobrev.com/)
-
 * anyone who [contributed a patch](https://github.com/mathiasbynens/dotfiles/contributors) or [made a helpful suggestion](https://github.com/mathiasbynens/dotfiles/issues)

@@ -149,6 +149,42 @@ defaults write com.apple.dock showhidden -bool true
 defaults write com.apple.dock show-recents -bool false
 
 ###############################################################################
+# Dock contents                                                               #
+###############################################################################
+
+# Rebuild the Dock's pinned apps to match this setup. Apps are added in order
+# (top→bottom, since the Dock is on the right edge). They must already be
+# installed — Google Chrome and Cursor come from the Brewfile; System Settings
+# is built in. macOS fills in the label/icon on the next `killall Dock`.
+#
+# Note: Chrome web apps / PWAs (e.g. the "tado°" webapp) live inside a specific
+# Chrome profile and can't be pinned from a script, so re-pin those by hand.
+
+dock_add_app() {
+	defaults write com.apple.dock persistent-apps -array-add \
+		"<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>${1}</string><key>_CFURLStringType</key><integer>15</integer></dict></dict><key>tile-type</key><string>file-tile</string></dict>"
+}
+
+dock_add_folder() {
+	# $1 file URL, $2 displayas (0 stack / 1 folder), $3 showas (0 auto / 1 fan /
+	# 2 grid / 3 list), $4 arrangement (1 name / 2 date added / 3 date modified /
+	# 4 date created / 5 kind)
+	defaults write com.apple.dock persistent-others -array-add \
+		"<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>${1}</string><key>_CFURLStringType</key><integer>15</integer></dict><key>file-type</key><integer>2</integer><key>displayas</key><integer>${2}</integer><key>showas</key><integer>${3}</integer><key>arrangement</key><integer>${4}</integer></dict><key>tile-type</key><string>directory-tile</string></dict>"
+}
+
+# Start from an empty Dock, then add only these.
+defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock persistent-others -array
+
+dock_add_app "file:///Applications/Google%20Chrome.app/"
+dock_add_app "file:///System/Applications/System%20Settings.app/"
+dock_add_app "file:///Applications/Cursor.app/"
+
+# Downloads as a date-added grid stack at the bottom of the Dock.
+dock_add_folder "file://${HOME}/Downloads/" 0 1 2
+
+###############################################################################
 # Mission Control                                                             #
 ###############################################################################
 

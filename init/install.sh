@@ -76,6 +76,17 @@ if [ "$bundled" != true ]; then
     exit 1
 fi
 
+# ========= SSH key ==========
+
+# Generate a modern ed25519 key if none exists. Git is configured to sign
+# commits with ~/.ssh/id_ed25519.pub (commit.gpgSign = true), so the key must
+# exist before the first commit. After this, add it to GitHub as both an
+# authentication and a signing key and switch the remote to SSH — see README.
+if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
+    echo "Generating an ed25519 SSH key…"
+    ssh-keygen -t ed25519 -a 100 -C "$(whoami)@$(hostname -s)" -f "$HOME/.ssh/id_ed25519" -N ""
+fi
+
 # ========= Touch ID for sudo ==========
 
 # Let sudo (including the .macos step below) accept Touch ID. The drop-in

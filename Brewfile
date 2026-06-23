@@ -81,7 +81,6 @@ brew 'jsonlint'
 brew 'tdewolff/tap/minify'
 brew 'minio'
 brew 'node' # This installs `npm` too using the recommended installation method
-brew 'openjdk'
 brew 'optipng'
 brew 'p7zip'
 brew 'pigz'

@@ -35,6 +35,18 @@ defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 # Value captured from this machine; "Regular" is the size, "Dark" the style.
 defaults write NSGlobalDomain AppleIconAppearanceTheme -string "RegularDark"
 
+# Liquid Glass look: Tinted (vs Clear). 1 = Tinted, captured from this machine.
+defaults write NSGlobalDomain NSGlassDiffusionSetting -int 1
+
+# Accent colour: Graphite. Graphite is the special pairing of AppleAccentColor
+# -1 with AppleAquaColorVariant 6.
+defaults write NSGlobalDomain AppleAccentColor -int -1
+defaults write NSGlobalDomain AppleAquaColorVariant -int 6
+
+# Tint the window background with the wallpaper colour (toggle on). The key is
+# inverted — false means tinting is enabled.
+defaults write NSGlobalDomain AppleReduceDesktopTinting -bool false
+
 # Show scroll bars only when scrolling.
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 

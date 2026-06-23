@@ -104,17 +104,30 @@ brew 'yarn'
 brew 'yt-dlp'
 brew 'zopfli'
 
-# Desktop apps via Cask (homebrew/cask is built-in; fonts & versions are merged in)
+# Desktop apps, CLI tools & runtimes via Cask
+# (homebrew/cask is built-in; fonts & versions are merged in)
 cask '1password'
+cask '1password-cli'
+cask 'beeper'
+cask 'claude'
+cask 'cursor'
 cask 'font-source-sans-3'
+cask 'gcloud-cli'
 cask 'google-chrome'
 cask 'haptickey'
 cask 'hey-desktop'
 cask 'iterm2'
 cask 'meetingbar'
+cask 'signal'
 cask 'slack'
+cask 'spotify'
 cask 'tableplus'
+cask 'tabula'
+cask 'viber'
+cask 'warp'
+cask 'whatsapp'
 cask 'zoom'
+cask 'zulu@17'
 
 # Quick Look plugins
 # See https://github.com/sindresorhus/quick-look-plugins

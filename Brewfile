@@ -141,8 +141,10 @@ cask 'webpquicklook'
 # Requires the `mas` CLI (https://github.com/mas-cli/mas) and being signed in
 # to the App Store.
 brew 'mas'
+mas "Amazon Kindle", id: 302584613
 mas "Keynote", id: 361285480
 mas "Magnet", id: 441258766
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
 mas "The Unarchiver", id: 425424353
+mas "Unsplash Wallpapers", id: 1284863847

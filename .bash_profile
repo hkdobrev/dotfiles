@@ -70,4 +70,11 @@ if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.bash.inc' ]; then
   . '/opt/homebrew/share/google-cloud-sdk/completion.bash.inc'
 fi
 
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Mole shell completion
+if output="$(mole completion bash 2>/dev/null)"; then eval "$output"; fi
+
 [[ -r ~/.bashrc ]] && source ~/.bashrc

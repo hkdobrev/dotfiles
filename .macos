@@ -94,9 +94,24 @@ defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool false
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
 
+# Fast key repeat: KeyRepeat 2 (~30ms between repeats), InitialKeyRepeat 15
+# (~225ms before repeating). Lower is faster. Takes effect after logout.
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# Repeat the key when held instead of showing the accent-character popup
+# (better for navigating in editors with j/k/h/l etc.).
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
 ###############################################################################
 # Screen & screen saver                                                       #
 ###############################################################################
+
+# Save screenshots to ~/Screenshots as PNG, without the window drop-shadow.
+mkdir -p "${HOME}/Screenshots"
+defaults write com.apple.screencapture location -string "${HOME}/Screenshots"
+defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture disable-shadow -bool true
 
 # Start the screen saver after 5 minutes, and show the clock on it.
 defaults -currentHost write com.apple.screensaver idleTime -int 300
@@ -118,6 +133,10 @@ sudo pmset -c sleep 0
 # Use list view in all Finder windows by default.
 # Four-letter codes: `Nlsv` list, `icnv` icon, `clmv` column, `glyv` gallery.
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+# Don't write .DS_Store files on network or USB volumes.
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Open new Finder windows in the Downloads folder.
 defaults write com.apple.finder NewWindowTarget -string "PfLo"

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DisabledUTTypes</key>
+	<array/>
+	<key>EnabledPreferenceRules</key>
+	<array>
+		<string>Custom.relatedContents</string>
+		<string>com.apple.AppStore</string>
+		<string>com.apple.iBooksX</string>
+		<string>com.apple.iCal</string>
+		<string>com.apple.AddressBook</string>
+		<string>com.apple.Dictionary</string>
+		<string>com.apple.mail</string>
+		<string>com.apple.Notes</string>
+		<string>com.apple.Photos</string>
+		<string>com.apple.podcasts</string>
+		<string>com.apple.reminders</string>
+		<string>com.apple.Safari</string>
+		<string>com.apple.shortcuts</string>
+		<string>com.apple.tips</string>
+		<string>com.apple.VoiceMemos</string>
+		<string>System.files</string>
+		<string>System.folders</string>
+		<string>System.iphoneApps</string>
+		<string>System.menuItems</string>
+	</array>
+	<key>PreferencesVersion</key>
+	<integer>1</integer>
+	<key>queryViewOptions</key>
+	<data>
+	YnBsaXN0MDDRAQJcZGlzcGxheVN0eWxlEAAICxgAAAAAAAABAQAAAAAAAAADAAAAAAAA
+	AAAAAAAAAAAAGg==
+	</data>
+</dict>
+</plist>

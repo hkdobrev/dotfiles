@@ -22,7 +22,13 @@ export LESS="--quit-if-one-screen --mouse --raw-control-chars --no-init --tabs=4
 export LESS_TERMCAP_md="${yellow}";
 
 export PAGER="less";
-export MANPAGER="less";
+# Use bat (when present) for syntax-highlighted man pages; fall back to less.
+if command -v bat > /dev/null; then
+	export MANPAGER="sh -c 'col -bx | bat --language man --plain'";
+	export MANROFFOPT="-c";
+else
+	export MANPAGER="less";
+fi
 
 export VISUAL="$EDITOR"
 
@@ -31,10 +37,16 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
 export GOPATH=$HOME/go
 
-export NVM_DIR="$HOME/.nvm"
-
 export GPG_TTY=$(tty)
 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export ANDROID_HOME=~/Library/Android/sdk
 export TERM_PROGRAM="WarpTerminal"
+
+# fzf: use fd for the file/dir candidate lists (respects .gitignore, includes
+# hidden files, skips .git).
+if command -v fd > /dev/null; then
+	export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+	export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+	export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+fi

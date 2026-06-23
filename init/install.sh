@@ -76,6 +76,15 @@ if [ "$bundled" != true ]; then
     exit 1
 fi
 
+# ========= Touch ID for sudo ==========
+
+# Let sudo (including the .macos step below) accept Touch ID. The drop-in
+# /etc/pam.d/sudo_local persists across macOS updates (Sonoma and later).
+if [ ! -e /etc/pam.d/sudo_local ]; then
+    echo "Enabling Touch ID for sudo…"
+    printf 'auth       sufficient     pam_tid.so\n' | sudo tee /etc/pam.d/sudo_local >/dev/null
+fi
+
 # ========= Default shell ==========
 
 # Enable the latest Bash installed from Homebrew.
@@ -87,6 +96,12 @@ fi
 if [ "${SHELL:-}" != "$BREW_BASH" ]; then
     chsh -s "$BREW_BASH"
 fi
+
+# ========= Git maintenance ==========
+
+# Register this dotfiles repo for background maintenance (incremental gc,
+# commit-graph, prefetch). Run the same in any other repo you want kept tidy.
+git -C "$DOTFILES" maintenance start 2>/dev/null || true
 
 # ========= macOS system preferences =========
 

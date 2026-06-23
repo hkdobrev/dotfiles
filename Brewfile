@@ -83,6 +83,7 @@ brew 'jsonlint'
 brew 'tdewolff/tap/minify'
 brew 'minio'
 brew 'mise' # unified runtime manager (Ruby, Node, …) — replaces rbenv & nvm
+brew 'mole' # tw93/Mole — deep clean & optimise the Mac (the .bash_profile completion)
 brew 'node' # This installs `npm` too using the recommended installation method
 brew 'optipng'
 brew 'p7zip'

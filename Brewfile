@@ -1,3 +1,8 @@
+# Third-party taps. Homebrew 6.0 requires these to be trusted; init/install.sh
+# runs `brew trust --formula …` for the formulae below before `brew bundle`.
+tap 'caarlos0/tap'
+tap 'tdewolff/tap'
+
 # Install GNU core utilities (those that come with OS X are outdated)
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew 'coreutils'
@@ -115,7 +120,7 @@ cask 'zoom'
 # See https://github.com/sindresorhus/quick-look-plugins
 cask 'qlmarkdown'
 cask 'quicklook-csv'
-cask 'quicklook-json'
+# quicklook-json was disabled by Homebrew on 2025-12-23 (no longer meets cask criteria)
 cask 'suspicious-package'
 cask 'webpquicklook'
 
@@ -123,8 +128,8 @@ cask 'webpquicklook'
 # Requires the `mas` CLI (https://github.com/mas-cli/mas) and being signed in
 # to the App Store.
 brew 'mas'
-mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Magnet", id: 441258766
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
 mas "The Unarchiver", id: 425424353

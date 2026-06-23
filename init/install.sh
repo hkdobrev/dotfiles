@@ -39,10 +39,38 @@ elif [ -x /usr/local/bin/brew ]; then
     eval "$(/usr/local/bin/brew shellenv)"
 fi
 
+# Homebrew 6.0 refuses to load formulae from untrusted third-party taps.
+# Trust just the formulae we use (narrower than trusting the whole tap).
+# `brew trust` only records an entry, so it is safe to run before the tap
+# exists; `brew bundle` taps it from the qualified name in the Brewfile.
+brew trust --formula caarlos0/tap/fork-cleaner
+brew trust --formula tdewolff/tap/minify
+
 # Install all formulae, casks and Mac App Store apps.
-# `brew bundle` is built into Homebrew 6.0+, so no `brew tap` is needed.
+# `brew bundle` is built into Homebrew 6.0+.
 # Sign in to the App Store first so the `mas` entries can install.
-brew bundle --file="$DOTFILES/Brewfile"
+#
+# `--no-upgrade` only installs what is missing. Without it, an OS-bundled Mac
+# App Store app that is a version behind (e.g. Keynote/Pages/Numbers) makes
+# `brew bundle` attempt a `mas upgrade`, which needs an interactive sudo and
+# is reported as a failure on a fresh machine.
+#
+# Homebrew 6.0 installs in parallel, and concurrent jobs can briefly contend
+# for a shared dependency's Cellar lock ("process has already locked …"),
+# failing an otherwise-fine formula. `brew bundle` is idempotent, so retry a
+# few times; each pass only installs what is still missing.
+bundled=false
+for attempt in 1 2 3; do
+    if brew bundle --file="$DOTFILES/Brewfile" --no-upgrade; then
+        bundled=true
+        break
+    fi
+    echo "brew bundle attempt $attempt failed; retrying…"
+done
+if [ "$bundled" != true ]; then
+    echo "brew bundle still failing after 3 attempts; see the errors above." >&2
+    exit 1
+fi
 
 # ========= Default shell ==========
 

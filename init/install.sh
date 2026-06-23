@@ -114,6 +114,17 @@ fi
 # commit-graph, prefetch). Run the same in any other repo you want kept tidy.
 git -C "$DOTFILES" maintenance start 2>/dev/null || true
 
+# ========= Linux container runtime (apple/container) ==========
+
+# Start Apple's `container` service and install its default kernel so Linux
+# containers work out of the box (Apple Silicon + macOS 26+). Idempotent;
+# tolerate older hardware/OS where it isn't available. For an always-on service
+# at login instead, use `brew services start container`.
+if command -v container >/dev/null 2>&1; then
+    echo "Starting the Apple container runtime…"
+    container system start --enable-kernel-install || true
+fi
+
 # ========= macOS system preferences =========
 
 # Apply this setup's macOS defaults (Dock, Finder, trackpad, Mission Control,

@@ -1,8 +1,8 @@
 # Alias GNU coreutils so they are not in PATH for interactive scripts like brew
 # They would not break compilation, but would work like GNU in interactive shell
-for bin in "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"/* "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin"/* "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"/*; do
-    alias "$(basename "$bin")"="$bin"
-done
+# for bin in "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"/* "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin"/* "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"/*; do
+#     alias "$(basename "$bin")"="$bin"
+# done
 
 # Discover GNU coreutils man pages
 export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/man:$MANPATH"
@@ -28,6 +28,7 @@ export PATH=$PATH:$HOME/Library/Python/3.7/bin
 
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
+export PATH="$HOME/.local/bin:$PATH";
 export PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/openjdk@11/bin:$PATH"

@@ -2,5 +2,8 @@
   "license": "MIT",
   "dependencies": {
     "jsonresume-theme-eloquent": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1"
   }
 }

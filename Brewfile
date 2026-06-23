@@ -49,6 +49,7 @@ brew 'bat'
 brew 'bfg'
 brew 'cloc'
 brew 'cmake'
+brew 'container' # apple/container — run Linux containers in lightweight VMs (Apple Silicon, macOS 26+)
 brew 'csvkit'
 brew 'ctags'
 brew 'direnv'

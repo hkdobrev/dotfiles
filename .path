@@ -16,23 +16,14 @@ export MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/man:$MANPATH"
 # Use non-brew node packages
 # export PATH="$HOME/.npm-packages/bin:$PATH"
 
-# Add rbenv to PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
-
 # Add Go-installed binaries to PATH
 export PATH=$PATH:$HOMEBREW_PREFIX/opt/go/libexec/bin
 
 export PATH=$PATH:$HOME/go/bin
 
-export PATH=$PATH:$HOME/Library/Python/3.7/bin
-
-# Add `~/bin` to the `$PATH`
+# Add `~/bin` and `~/.local/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 export PATH="$HOME/.local/bin:$PATH";
-export PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/bin:$PATH"
-export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
-export PATH="$HOMEBREW_PREFIX/opt/openjdk@11/bin:$PATH"
-export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/openjdk@11/include"
-export PATH="$HOMEBREW_PREFIX/opt/icu4c@76/bin:$PATH"
-export PATH="$HOMEBREW_PREFIX/opt/icu4c@76/sbin:$PATH"
+
+# Android SDK tools
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools

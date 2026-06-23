@@ -27,19 +27,13 @@ alias oo="open ."
 alias p="cd ~/projects"
 alias python="python3"
 alias pip="pip3"
-alias t="travis"
 alias tf="tofu"
-alias tl="travis lint"
-alias tm="travis monitor --my-repos --notify growl"
 alias v="vim"
-alias vg="vagrant"
 alias w="wrangler"
 alias y="yarn"
 
 if [ -f /opt/homebrew/bin/brew ]; then
-    # Brew & Cask aliases
     alias b="brew"
-    alias cask="brew cask"
 fi
 
 # Detect which `ls` flavor is in use
@@ -82,8 +76,8 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
-# Flush DNS
-alias flushdns="sudo discoveryutil mdnsflushcache; sudo discoveryutil udnsflushcaches"
+# Flush DNS (modern macOS; `discoveryutil` was removed after OS X 10.10)
+alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
@@ -125,7 +119,7 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]))"'
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
@@ -155,9 +149,6 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "$method"="lwp-request -m '$method'"
 done
 
-# Make Grunt print stack traces by default
-command -v grunt > /dev/null && alias grunt="grunt --stack"
-
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
@@ -173,6 +164,3 @@ alias dnd="do-not-disturb toggle"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
-
-# Faster npm for Europeans
-command -v npm > /dev/null && alias npme="npm --registry http://registry.npmjs.eu/"

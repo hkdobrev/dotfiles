@@ -40,8 +40,6 @@ if command -v rbenv > /dev/null; then
     eval "$(rbenv init -)"
 fi;
 
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
@@ -78,3 +76,17 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 if output="$(mole completion bash 2>/dev/null)"; then eval "$output"; fi
 
 [[ -r ~/.bashrc ]] && source ~/.bashrc
+
+# De-duplicate $PATH (keeping the first occurrence of each entry). Many of the
+# blocks above and in ~/.path prepend the same dirs, so without this $PATH grows
+# every time the shell is re-sourced (e.g. via `reload`).
+dedup_path() {
+    local IFS=: dir seen="" newpath=""
+    for dir in $PATH; do
+        case ":$seen:" in *":$dir:"*) continue ;; esac
+        seen="${seen:+$seen:}$dir"
+        newpath="${newpath:+$newpath:}$dir"
+    done
+    export PATH="$newpath"
+}
+dedup_path

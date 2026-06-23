@@ -250,14 +250,14 @@
 
 [core]
     # Global `.gitattributes`
-    attributesfile = ~/git/.gitattributes
+    attributesFile = ~/git/.gitattributes
 
     # Default editor for commit messages and other inputs
     # Even when EDITOR is set to something else
     editor=vim
 
     # Global `.gitignore`
-    excludesfile = ~/git/.gitignore_global
+    excludesFile = ~/git/.gitignore_global
 
     pager = delta
 
@@ -330,7 +330,7 @@
 
 [help]
     # Automatically correct and execute mistyped commands
-    autocorrect = 2
+    autoCorrect = 2
 
 [gpg]
     program = gpg
@@ -438,7 +438,7 @@
     # Reuse recorded resolutions
     enabled = true
 
-    autoupdate = true
+    autoUpdate = true
 
 [status]
     # Show all untracked files in untracked directories

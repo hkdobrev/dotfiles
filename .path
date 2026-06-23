@@ -24,6 +24,7 @@ path_append "$HOME/go/bin"
 path_prepend "$HOME/bin"
 path_prepend "$HOME/.local/bin"
 
-# Android SDK tools
-path_append "$ANDROID_HOME/emulator"
-path_append "$ANDROID_HOME/platform-tools"
+# Android SDK tools. $ANDROID_HOME is set in ~/.exports, which is sourced after
+# this file, so use the literal default location here (same as ~/go above).
+path_append "$HOME/Library/Android/sdk/emulator"
+path_append "$HOME/Library/Android/sdk/platform-tools"

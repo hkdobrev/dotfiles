@@ -297,9 +297,9 @@ defaults write com.apple.assistant.support "Search Queries Data Sharing Status" 
 
 # The "Results from Apps" sources and "Show Related Content" toggle are stored
 # in an opaque binary blob (com.apple.Spotlight `queryViewOptions`) on macOS
-# Tahoe, not as individual `defaults` keys — so import the captured domain as a
-# whole (like the keyboard shortcuts above). It enables results from only
-# Applications, Calculator and System Settings, with Show Related Content off.
+# Tahoe rather than as individual `defaults` keys, so reproduce them by importing
+# the Spotlight preferences captured from this machine (the same approach as the
+# keyboard shortcuts above). `defaults import` merges these keys into the domain.
 if [ -f "${MACOS_DIR}/init/com.apple.Spotlight.plist" ]; then
 	defaults import com.apple.Spotlight "${MACOS_DIR}/init/com.apple.Spotlight.plist"
 fi

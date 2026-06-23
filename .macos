@@ -31,6 +31,10 @@ MACOS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Use the Dark appearance.
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
+# Set the app icon & widget style (System Settings → Appearance) to Dark.
+# Value captured from this machine; "Regular" is the size, "Dark" the style.
+defaults write NSGlobalDomain AppleIconAppearanceTheme -string "RegularDark"
+
 # Show scroll bars only when scrolling.
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 

@@ -4,6 +4,22 @@
 [[ -n $__DOTFILES_PROFILE_LOADED ]] && return
 __DOTFILES_PROFILE_LOADED=1
 
+# Idempotent $PATH helpers: only add a directory if it is not already present,
+# so re-sourcing the shell (e.g. `reload`) never produces duplicate entries.
+# Defined up front because ~/.path and the tool blocks below rely on them.
+path_prepend() {
+    case ":$PATH:" in
+        *":$1:"*) ;;
+        *) PATH="$1${PATH:+:$PATH}" ;;
+    esac
+}
+path_append() {
+    case ":$PATH:" in
+        *":$1:"*) ;;
+        *) PATH="${PATH:+$PATH:}$1" ;;
+    esac
+}
+
 [[ $- == *i* ]] && bind -f ~/.inputrc
 
 export NVM_DIR="$HOME/.nvm"
@@ -35,9 +51,12 @@ if [ -f ~/.iterm2_shell_integration.bash ]; then
     source ~/.iterm2_shell_integration.bash
 fi
 
-# Add `rbenv init` to the shell to enable shims and autocompletion
+# Add `rbenv init` to the shell to enable shims and autocompletion. rbenv's own
+# output prepends the shims dir unconditionally (so it duplicates on `reload`);
+# add the shims idempotently ourselves and drop that line from the eval.
 if command -v rbenv > /dev/null; then
-    eval "$(rbenv init -)"
+    path_prepend "$HOME/.rbenv/shims"
+    eval "$(rbenv init - bash | grep -v '^export PATH=')"
 fi;
 
 # Load the shell dotfiles, and then some:
@@ -48,9 +67,7 @@ for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,completion}; do
 done;
 unset file;
 
-export PATH="$HOME/.local/bin:$PATH"
-
-export PATH=$PATH:$HOME/.maestro/bin
+path_append "$HOME/.maestro/bin"
 
 # pnpm
 export PNPM_HOME="/Users/hkdobrev/Library/pnpm"
@@ -70,23 +87,11 @@ fi
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+path_prepend "$BUN_INSTALL/bin"
 
 # Mole shell completion
 if output="$(mole completion bash 2>/dev/null)"; then eval "$output"; fi
 
 [[ -r ~/.bashrc ]] && source ~/.bashrc
 
-# De-duplicate $PATH (keeping the first occurrence of each entry). Many of the
-# blocks above and in ~/.path prepend the same dirs, so without this $PATH grows
-# every time the shell is re-sourced (e.g. via `reload`).
-dedup_path() {
-    local IFS=: dir seen="" newpath=""
-    for dir in $PATH; do
-        case ":$seen:" in *":$dir:"*) continue ;; esac
-        seen="${seen:+$seen:}$dir"
-        newpath="${newpath:+$newpath:}$dir"
-    done
-    export PATH="$newpath"
-}
-dedup_path
+export PATH

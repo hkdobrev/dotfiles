@@ -17,13 +17,13 @@ export MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/man:$MANPATH"
 # export PATH="$HOME/.npm-packages/bin:$PATH"
 
 # Add Go-installed binaries to PATH
-export PATH=$PATH:$HOMEBREW_PREFIX/opt/go/libexec/bin
-
-export PATH=$PATH:$HOME/go/bin
+path_append "$HOMEBREW_PREFIX/opt/go/libexec/bin"
+path_append "$HOME/go/bin"
 
 # Add `~/bin` and `~/.local/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
-export PATH="$HOME/.local/bin:$PATH";
+path_prepend "$HOME/bin"
+path_prepend "$HOME/.local/bin"
 
 # Android SDK tools
-export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools
+path_append "$ANDROID_HOME/emulator"
+path_append "$ANDROID_HOME/platform-tools"

@@ -92,6 +92,8 @@ brew 'pigz'
 brew 'postgresql'
 brew 'pv'
 brew 'python3'
+brew 'pipx' # install & run Python CLI apps in isolated venvs (e.g. headroom-ai)
+brew 'uv' # fast Python pkg/installer; provides uvx for headroom's Serena MCP
 brew 'rename'
 brew 'ssh-copy-id', link: true
 brew 'opentofu'

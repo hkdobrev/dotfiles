@@ -114,6 +114,41 @@ fi
 # commit-graph, prefetch). Run the same in any other repo you want kept tidy.
 git -C "$DOTFILES" maintenance start 2>/dev/null || true
 
+# ========= Headroom (Claude Code context compression) ==========
+
+# Install the headroom CLI from PyPI into its own pipx-managed venv (Python,
+# not the Docker image). pipx itself comes from the Brewfile. The `cc` alias in
+# ~/.aliases runs `headroom wrap claude … --memory --code-graph`. Idempotent —
+# pipx skips an already-installed package.
+if command -v pipx >/dev/null 2>&1; then
+    echo "Installing the headroom CLI…"
+    pipx install "headroom-ai[all]" || true
+fi
+
+# Pre-install the code-graph backend (codebase-memory-mcp). headroom 0.27 pins
+# v0.6.0, whose release has no published binaries (404), so its auto-download
+# fails. headroom probes ~/.local/bin first, so drop a working build there to
+# take over. Serena (the other --code-graph helper) runs via uvx from the
+# Brewfile's `uv`. Bump CBM_VER as new tagged binaries ship.
+CBM_VER="v0.8.1"
+CBM_BIN="$HOME/.local/bin/codebase-memory-mcp"
+if [ ! -x "$CBM_BIN" ]; then
+    case "$(uname -m)" in
+        arm64 | aarch64) CBM_ARCH="darwin-arm64" ;;
+        *) CBM_ARCH="darwin-amd64" ;;
+    esac
+    CBM_URL="https://github.com/DeusData/codebase-memory-mcp/releases/download/${CBM_VER}/codebase-memory-mcp-${CBM_ARCH}.tar.gz"
+    echo "Installing codebase-memory-mcp ${CBM_VER} (${CBM_ARCH})…"
+    CBM_TMP="$(mktemp -d)"
+    if curl -fsSL "$CBM_URL" -o "$CBM_TMP/cbm.tar.gz" && tar -xzf "$CBM_TMP/cbm.tar.gz" -C "$CBM_TMP"; then
+        mkdir -p "$HOME/.local/bin"
+        install -m 0755 "$(find "$CBM_TMP" -type f -name codebase-memory-mcp | head -1)" "$CBM_BIN"
+    else
+        echo "  codebase-memory-mcp download failed — skipping (code graph stays off)."
+    fi
+    rm -rf "$CBM_TMP"
+fi
+
 # ========= Linux container runtime (apple/container) ==========
 
 # Start Apple's `container` service and install its default kernel so Linux

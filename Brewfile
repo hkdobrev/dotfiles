@@ -119,6 +119,7 @@ cask '1password-cli'
 cask 'beeper'
 cask 'claude'
 cask 'cursor'
+cask 'fathom' # AI meeting notetaker (records, transcribes & summarises calls)
 cask 'font-source-sans-3'
 cask 'gcloud-cli'
 cask 'google-chrome'

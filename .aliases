@@ -10,6 +10,7 @@ alias c="cursor"
 # context compression, with persistent cross-session memory and code-graph
 # intelligence. `--` forwards the rest to claude itself.
 alias cc="headroom wrap claude --memory --code-graph -- --allow-dangerously-skip-permissions --remote-control"
+alias цц="cc"
 alias d="cd ~/Documents"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"

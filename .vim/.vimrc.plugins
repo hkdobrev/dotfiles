@@ -41,6 +41,8 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'aklt/plantuml-syntax'
 
 " Themes
+Plug 'sainnhe/gruvbox-material'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'vim-scripts/Spacegray.vim'
 " Plug 'bling/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
@@ -81,8 +83,22 @@ endif
 let g:tcomment#replacements_xml={}
 
 " Color scheme
-colorscheme spacegray
-let g:spacegray_underline_search = 1
+" Enable 24-bit truecolor (Warp and Vim 9 support it) so the modern themes
+" below render with their full palette instead of a 256-colour approximation.
+if has('termguicolors')
+    set termguicolors
+endif
+
+" gruvbox-material tuning: soft, warm, easy on the eyes for long reading.
+let g:gruvbox_material_background = 'medium'      " 'hard' | 'medium' | 'soft'
+let g:gruvbox_material_foreground = 'material'
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_enable_bold = 1
+
+set background=dark
+colorscheme catppuccin_mocha
+" To try the alternative instead, swap the line above for:
+"   colorscheme gruvbox-material
 
 " vim-surround key mappings
 " Surround text currently selected while in visual mode

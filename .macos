@@ -99,9 +99,9 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
-# Repeat the key when held instead of showing the accent-character popup
-# (better for navigating in editors with j/k/h/l etc.).
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# Show the accent-character popup when a key is held (for typing accented
+# characters like é, ñ, ü) instead of repeating the key.
+defaults write -g ApplePressAndHoldEnabled -bool true
 
 ###############################################################################
 # Screen & screen saver                                                       #
